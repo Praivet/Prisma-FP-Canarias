@@ -1,0 +1,26 @@
+info:
+  name: http://localhost:3000/api/orders/1
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://localhost:3000/api/order-items/
+  body:
+    type: json
+    data: |-
+      {
+        "customerId" : 1,
+        "bicycleId": 2,
+        "orderId": 2,
+        "unitPrice": 1000,
+        "status": "pending"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

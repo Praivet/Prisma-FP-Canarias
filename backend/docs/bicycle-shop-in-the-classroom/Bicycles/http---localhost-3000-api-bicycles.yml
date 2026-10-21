@@ -1,0 +1,26 @@
+info:
+  name: http://localhost:3000/api/bicycles
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:3000/api/bicycles
+  body:
+    type: json
+    data: |-
+      {
+        "brandId": 1,
+        "model": "Brum",
+        "description": "lol",
+        "price": 993,
+        "stock": 102
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
