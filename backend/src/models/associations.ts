@@ -1,27 +1,53 @@
-import { Bicycle } from "../modules/bicycles/bicycle.model.js";
-import { Brand } from "../modules/brands/brand.model.js";
-import { BicycleDetail } from "../modules/bicycle-details/bicycle-detail.model.js";
-import { Order } from "../modules/orders/order.model.js";
-import { Customer } from "../modules/customers/customer.model.js";
-import { OrderItem } from "../modules/order-items/order-item.model.js"
+import { AcademicYear } from "../modules/academic-year/academic-year.model.js";
+import { Skill } from "../modules/skill/skill.model.js";
+import { Student } from "../modules/student/student.model.js";
+import { StudentEnrollment } from "../modules/student-enrollment/student-enrollment.model.js";
+import { StudentInterest } from "../modules/student-interest/student-interest.model.js";
+import { StudentSkill } from "../modules/student-skill/student-skill.model.js";
+// TODO: uncomment when these models are implemented (their files are still empty).
+// import { User } from "../modules/user/user.model.js";
+// import { TrainingProgram } from "../modules/training-program/training-program.model.js";
+// import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
+// import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
 
 export function defineAssociations() {
-  console.log("Associations defined"); 
-  Brand.hasMany(Bicycle, { foreignKey: "brandId", as: "bicycles" });
-  Bicycle.belongsTo(Brand, { foreignKey: "brandId", as: "brand" });
+  console.log("Associations defined");
 
-  Bicycle.hasOne(BicycleDetail,{foreignKey: "bicycleId", as: "detail", onDelete: "CASCADE"});
-  BicycleDetail.belongsTo(Bicycle, {foreignKey: "bicycleId", as: "bicycle"});
+  // 1:1 User -> Student. The FK (userId, unique) is in students.
+  // User.hasOne(Student, { foreignKey: "userId", as: "student", onDelete: "CASCADE" });
+  // Student.belongsTo(User, { foreignKey: "userId", as: "user" });
 
-  Customer.hasMany(Order, { foreignKey: "customerId", as: "orders" });
-  Order.belongsTo(Customer, { foreignKey: "customerId", as: "customer" });
+  // 1:N Student -> StudentEnrollment
+  Student.hasMany(StudentEnrollment, { foreignKey: "studentId", as: "enrollments", onDelete: "CASCADE" });
+  StudentEnrollment.belongsTo(Student, { foreignKey: "studentId", as: "student" });
 
-  Order.belongsToMany(Bicycle, {through: OrderItem, foreignKey: "orderId", otherKey: "bicycleId", as: "bicycles",});
-  Bicycle.belongsToMany(Order, {through: OrderItem, foreignKey: "bicycleId", otherKey: "orderId", as: "orders",});
+  // 1:N TrainingProgram -> StudentEnrollment
+  // TrainingProgram.hasMany(StudentEnrollment, { foreignKey: "trainingProgramId", as: "enrollments" });
+  // StudentEnrollment.belongsTo(TrainingProgram, { foreignKey: "trainingProgramId", as: "trainingProgram" });
 
-  Order.hasMany(OrderItem, { foreignKey: "orderId", as: "items" });
-  OrderItem.belongsTo(Order, { foreignKey: "orderId", as: "order" });
+  // 1:N AcademicYear -> StudentEnrollment
+  AcademicYear.hasMany(StudentEnrollment, { foreignKey: "academicYearId", as: "enrollments" });
+  StudentEnrollment.belongsTo(AcademicYear, { foreignKey: "academicYearId", as: "academicYear" });
 
-  Bicycle.hasMany(OrderItem, { foreignKey: "bicycleId", as: "items" });
-  OrderItem.belongsTo(Bicycle, { foreignKey: "bicycleId", as: "bicycle" });
+  // 1:N Student -> StudentInterest
+  Student.hasMany(StudentInterest, { foreignKey: "studentId", as: "interests", onDelete: "CASCADE" });
+  StudentInterest.belongsTo(Student, { foreignKey: "studentId", as: "student" });
+
+  // N:M Student <-> Skill through the join table StudentSkill.
+  Student.belongsToMany(Skill, { through: StudentSkill, foreignKey: "studentId", otherKey: "skillId", as: "skills" });
+  Skill.belongsToMany(Student, { through: StudentSkill, foreignKey: "skillId", otherKey: "studentId", as: "students" });
+
+  // The join table also gets its own 1:N on each side, to query it directly (like OrderItem).
+  Student.hasMany(StudentSkill, { foreignKey: "studentId", as: "studentSkills" });
+  StudentSkill.belongsTo(Student, { foreignKey: "studentId", as: "student" });
+
+  Skill.hasMany(StudentSkill, { foreignKey: "skillId", as: "studentSkills" });
+  StudentSkill.belongsTo(Skill, { foreignKey: "skillId", as: "skill" });
+
+  // 1:N EducationalCenter -> TrainingProgram and ProfessionalFamily -> TrainingProgram
+  // (not part of these six entities, ready for whoever implements TrainingProgram).
+  // EducationalCenter.hasMany(TrainingProgram, { foreignKey: "educationalCenterId", as: "trainingPrograms" });
+  // TrainingProgram.belongsTo(EducationalCenter, { foreignKey: "educationalCenterId", as: "educationalCenter" });
+  // ProfessionalFamily.hasMany(TrainingProgram, { foreignKey: "professionalFamilyId", as: "trainingPrograms" });
+  // TrainingProgram.belongsTo(ProfessionalFamily, { foreignKey: "professionalFamilyId", as: "professionalFamily" });
 }
