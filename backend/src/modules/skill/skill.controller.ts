@@ -78,7 +78,7 @@ export class SkillController {
     next: NextFunction
   ) {
     try {
-      const { name, description } = req.body;
+      const { name, category, description } = req.body;
 
       if (!name) {
         res.status(400).json({
@@ -90,6 +90,7 @@ export class SkillController {
 
       const skill = await SkillService.create({
         name,
+        category,
         description,
       });
 

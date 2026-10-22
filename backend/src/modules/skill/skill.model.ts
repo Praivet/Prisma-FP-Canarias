@@ -15,9 +15,8 @@ export class Skill extends Model<
 > {
   declare id: CreationOptional<number>;
   declare name: string;
+  declare category: CreationOptional<string | null>;
   declare description: CreationOptional<string | null>;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
 }
 
 Skill.init(
@@ -34,14 +33,15 @@ Skill.init(
       unique: true,
     },
 
-    description: {
-      type: DataTypes.TEXT,
+    category: {
+      type: DataTypes.STRING(100),
       allowNull: true,
     },
 
-    createdAt: DataTypes.DATE,
-
-    updatedAt: DataTypes.DATE,
+    description: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
   },
   {
     sequelize,
@@ -50,6 +50,7 @@ Skill.init(
 
     modelName: "Skill",
 
-    timestamps: true,
+    // The ERD has no createdAt/updatedAt for this table.
+    timestamps: false,
   }
 );

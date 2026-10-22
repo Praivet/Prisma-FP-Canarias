@@ -8,22 +8,19 @@ import {
 
 import { sequelize } from "../../config/database";
 
-export type EnrollmentStatus = "enrolled" | "completed" | "dropped";
-
 // 'Many' side of three 1:N: Student, TrainingProgram and AcademicYear -> StudentEnrollment.
-// It holds the three FKs (studentId, trainingProgramId, academicYearId).
+// It holds the three FKs (studentId, programId, academicYearId).
 export class StudentEnrollment extends Model<
   InferAttributes<StudentEnrollment>,
   InferCreationAttributes<StudentEnrollment>
 > {
   declare id: CreationOptional<number>;
   declare studentId: number;
-  declare trainingProgramId: number;
+  declare programId: number;
   declare academicYearId: number;
   declare enrollmentDate: CreationOptional<Date>;
-  declare status: CreationOptional<EnrollmentStatus>;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
+  declare graduationDate: CreationOptional<Date | null>;
+  declare status: CreationOptional<string>;
 }
 
 StudentEnrollment.init(
@@ -40,8 +37,8 @@ StudentEnrollment.init(
       allowNull: false,
     },
 
-    // FK of 1:N TrainingProgram -> StudentEnrollment. Same name as in associations.ts.
-    trainingProgramId: {
+    // FK of 1:N TrainingProgram -> StudentEnrollment. The ERD calls it programId.
+    programId: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
@@ -58,15 +55,17 @@ StudentEnrollment.init(
       defaultValue: DataTypes.NOW,
     },
 
+    // Null until the student finishes the program.
+    graduationDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+
     status: {
-      type: DataTypes.ENUM("enrolled", "completed", "dropped"),
+      type: DataTypes.STRING(30),
       allowNull: false,
       defaultValue: "enrolled",
     },
-
-    createdAt: DataTypes.DATE,
-
-    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,
@@ -75,6 +74,7 @@ StudentEnrollment.init(
 
     modelName: "StudentEnrollment",
 
-    timestamps: true,
+    // The ERD has no createdAt/updatedAt for this table.
+    timestamps: false,
   }
 );

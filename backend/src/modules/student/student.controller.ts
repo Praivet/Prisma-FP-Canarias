@@ -79,11 +79,11 @@ export class StudentController {
     next: NextFunction
   ) {
     try {
-      const { userId, birthDate, phone, city } = req.body;
+      const { userId, nationalId, firstName, lastName, email, phone, birthDate } = req.body;
 
-      if (!userId) {
+      if (!userId || !nationalId || !firstName || !lastName || !email) {
         res.status(400).json({
-          message: "userId is required",
+          message: "userId, nationalId, firstName, lastName and email are required",
         });
 
         return;
@@ -91,9 +91,12 @@ export class StudentController {
 
       const student = await StudentService.create({
         userId,
-        birthDate,
+        nationalId,
+        firstName,
+        lastName,
+        email,
         phone,
-        city,
+        birthDate,
       });
 
       res.status(201).json(student);

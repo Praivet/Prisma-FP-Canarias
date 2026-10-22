@@ -18,8 +18,6 @@ export class AcademicYear extends Model<
   declare startDate: Date;
   declare endDate: Date;
   declare isActive: CreationOptional<boolean>;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
 }
 
 AcademicYear.init(
@@ -52,10 +50,6 @@ AcademicYear.init(
       allowNull: false,
       defaultValue: false,
     },
-
-    createdAt: DataTypes.DATE,
-
-    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,
@@ -64,6 +58,7 @@ AcademicYear.init(
 
     modelName: "AcademicYear",
 
-    timestamps: true,
+    // The ERD has no createdAt/updatedAt for this table.
+    timestamps: false,
   }
 );

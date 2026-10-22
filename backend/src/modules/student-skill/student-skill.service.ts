@@ -1,4 +1,4 @@
-import { StudentSkill, SkillLevel } from "./student-skill.model";
+import { StudentSkill } from "./student-skill.model";
 import { Skill } from "../skill/skill.model";
 
 export class StudentSkillService {
@@ -6,13 +6,16 @@ export class StudentSkillService {
   // Service of the join table of the N:M Student <-> Skill.
   static async findAll() {
     return StudentSkill.findAll({
-      order: [["id", "ASC"]],
+      order: [["studentId", "ASC"], ["skillId", "ASC"]],
     });
   }
 
 
-  static async findById(id: number) {
-    return StudentSkill.findByPk(id);
+  // Composite PK: findByPk does not work, so we search by both columns.
+  static async findById(studentId: number, skillId: number) {
+    return StudentSkill.findOne({
+      where: { studentId, skillId },
+    });
   }
 
   // The skills of one student, with the skill data (JOIN with skills).
@@ -20,7 +23,7 @@ export class StudentSkillService {
     return StudentSkill.findAll({
       where: { studentId },
       include: [{ model: Skill, as: "skill" }],
-      order: [["id", "ASC"]],
+      order: [["skillId", "ASC"]],
     });
   }
 
@@ -28,21 +31,18 @@ export class StudentSkillService {
   static async create(data: {
     studentId: number;
     skillId: number;
-    level?: SkillLevel;
-    createdAt?: Date;
-    updatedAt?: Date;
+    proficiencyLevel?: string | null;
   }) {
     return StudentSkill.create(data);
   }
 
 
   // Receives the instance already loaded by the controller (the 404 check is done there).
+  // Only proficiencyLevel can change: studentId and skillId are the PK.
   static async update(
     studentSkill: StudentSkill,
     data: Partial<{
-      studentId: number;
-      skillId: number;
-      level: SkillLevel;
+      proficiencyLevel: string | null;
     }>
   ) {
     return studentSkill.update(data);

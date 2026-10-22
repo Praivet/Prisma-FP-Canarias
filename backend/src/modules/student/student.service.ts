@@ -36,9 +36,12 @@ export class StudentService {
 
   static async create(data: {
     userId: number;
-    birthDate?: Date | null;
+    nationalId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
     phone?: string | null;
-    city?: string | null;
+    birthDate?: Date | null;
     createdAt?: Date;
     updatedAt?: Date;
   }) {
@@ -51,9 +54,12 @@ export class StudentService {
     student: Student,
     data: Partial<{
       userId: number;
-      birthDate: Date | null;
+      nationalId: string;
+      firstName: string;
+      lastName: string;
+      email: string;
       phone: string | null;
-      city: string | null;
+      birthDate: Date | null;
     }>
   ) {
     return student.update(data);

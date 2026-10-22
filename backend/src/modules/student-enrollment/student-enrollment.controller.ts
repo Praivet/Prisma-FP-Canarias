@@ -86,11 +86,11 @@ export class StudentEnrollmentController {
     next: NextFunction
   ) {
     try {
-      const { studentId, trainingProgramId, academicYearId, enrollmentDate, status } = req.body;
+      const { studentId, programId, academicYearId, enrollmentDate, graduationDate, status } = req.body;
 
-      if (!studentId || !trainingProgramId || !academicYearId) {
+      if (!studentId || !programId || !academicYearId) {
         res.status(400).json({
-          message: "studentId, trainingProgramId and academicYearId are required",
+          message: "studentId, programId and academicYearId are required",
         });
 
         return;
@@ -98,9 +98,10 @@ export class StudentEnrollmentController {
 
       const studentEnrollment = await StudentEnrollmentService.create({
         studentId,
-        trainingProgramId,
+        programId,
         academicYearId,
         enrollmentDate,
+        graduationDate,
         status,
       });
 

@@ -1,4 +1,4 @@
-import { StudentEnrollment, EnrollmentStatus } from "./student-enrollment.model";
+import { StudentEnrollment } from "./student-enrollment.model";
 import { Student } from "../student/student.model";
 import { AcademicYear } from "../academic-year/academic-year.model";
 
@@ -38,12 +38,11 @@ export class StudentEnrollmentService {
 
   static async create(data: {
     studentId: number;
-    trainingProgramId: number;
+    programId: number;
     academicYearId: number;
     enrollmentDate?: Date;
-    status?: EnrollmentStatus;
-    createdAt?: Date;
-    updatedAt?: Date;
+    graduationDate?: Date | null;
+    status?: string;
   }) {
     return StudentEnrollment.create(data);
   }
@@ -54,10 +53,11 @@ export class StudentEnrollmentService {
     studentEnrollment: StudentEnrollment,
     data: Partial<{
       studentId: number;
-      trainingProgramId: number;
+      programId: number;
       academicYearId: number;
       enrollmentDate: Date;
-      status: EnrollmentStatus;
+      graduationDate: Date | null;
+      status: string;
     }>
   ) {
     return studentEnrollment.update(data);

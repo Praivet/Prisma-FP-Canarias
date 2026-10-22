@@ -36,16 +36,17 @@ export class StudentSkillController {
   }
 
 
-  // Route params arrive as strings: convert with Number(). 404 if nothing was found.
+  // Composite PK: the route carries both ids (/:studentId/:skillId). 404 if nothing was found.
   static async getById(
     req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const id = Number(req.params.id);
+      const studentId = Number(req.params.studentId);
+      const skillId = Number(req.params.skillId);
 
-      const studentSkill = await StudentSkillService.findById(id);
+      const studentSkill = await StudentSkillService.findById(studentId, skillId);
 
       if (!studentSkill) {
         res.status(404).json({
@@ -70,7 +71,7 @@ export class StudentSkillController {
     next: NextFunction
   ) {
     try {
-      const { studentId, skillId, level } = req.body;
+      const { studentId, skillId, proficiencyLevel } = req.body;
 
       if (!studentId || !skillId) {
         res.status(400).json({
@@ -83,7 +84,7 @@ export class StudentSkillController {
       const studentSkill = await StudentSkillService.create({
         studentId,
         skillId,
-        level,
+        proficiencyLevel,
       });
 
       res.status(201).json(studentSkill);
@@ -101,9 +102,10 @@ export class StudentSkillController {
     next: NextFunction
   ) {
     try {
-      const id = Number(req.params.id);
+      const studentId = Number(req.params.studentId);
+      const skillId = Number(req.params.skillId);
 
-      const studentSkill = await StudentSkillService.findById(id);
+      const studentSkill = await StudentSkillService.findById(studentId, skillId);
 
       if (!studentSkill) {
         res.status(404).json({
@@ -115,7 +117,7 @@ export class StudentSkillController {
 
       const updatedStudentSkill = await StudentSkillService.update(
         studentSkill,
-        req.body
+        { proficiencyLevel: req.body.proficiencyLevel }
       );
 
       res.json(updatedStudentSkill);
@@ -133,9 +135,10 @@ export class StudentSkillController {
     next: NextFunction
   ) {
     try {
-      const id = Number(req.params.id);
+      const studentId = Number(req.params.studentId);
+      const skillId = Number(req.params.skillId);
 
-      const studentSkill = await StudentSkillService.findById(id);
+      const studentSkill = await StudentSkillService.findById(studentId, skillId);
 
       if (!studentSkill) {
         res.status(404).json({

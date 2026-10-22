@@ -16,9 +16,12 @@ export class Student extends Model<
 > {
   declare id: CreationOptional<number>;
   declare userId: number;
-  declare birthDate: CreationOptional<Date | null>;
+  declare nationalId: string;
+  declare firstName: string;
+  declare lastName: string;
+  declare email: string;
   declare phone: CreationOptional<string | null>;
-  declare city: CreationOptional<string | null>;
+  declare birthDate: CreationOptional<Date | null>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -39,9 +42,27 @@ Student.init(
       unique: true,
     },
 
-    birthDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: true,
+    // DNI / NIE
+    nationalId: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      unique: true,
+    },
+
+    firstName: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+
+    lastName: {
+      type: DataTypes.STRING(150),
+      allowNull: false,
+    },
+
+    email: {
+      type: DataTypes.STRING(150),
+      allowNull: false,
+      validate: { isEmail: true },
     },
 
     phone: {
@@ -49,8 +70,8 @@ Student.init(
       allowNull: true,
     },
 
-    city: {
-      type: DataTypes.STRING(100),
+    birthDate: {
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
 

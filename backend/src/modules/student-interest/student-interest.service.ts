@@ -26,8 +26,6 @@ export class StudentInterestService {
     studentId: number;
     name: string;
     description?: string | null;
-    createdAt?: Date;
-    updatedAt?: Date;
   }) {
     return StudentInterest.create(data);
   }

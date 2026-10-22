@@ -29,8 +29,6 @@ export class AcademicYearService {
     startDate: Date;
     endDate: Date;
     isActive?: boolean;
-    createdAt?: Date;
-    updatedAt?: Date;
   }) {
     return AcademicYear.create(data);
   }

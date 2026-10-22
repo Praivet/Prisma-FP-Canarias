@@ -22,8 +22,9 @@ export function defineAssociations() {
   StudentEnrollment.belongsTo(Student, { foreignKey: "studentId", as: "student" });
 
   // 1:N TrainingProgram -> StudentEnrollment
-  // TrainingProgram.hasMany(StudentEnrollment, { foreignKey: "trainingProgramId", as: "enrollments" });
-  // StudentEnrollment.belongsTo(TrainingProgram, { foreignKey: "trainingProgramId", as: "trainingProgram" });
+  // The FK is called programId in the ERD.
+  // TrainingProgram.hasMany(StudentEnrollment, { foreignKey: "programId", as: "enrollments" });
+  // StudentEnrollment.belongsTo(TrainingProgram, { foreignKey: "programId", as: "trainingProgram" });
 
   // 1:N AcademicYear -> StudentEnrollment
   AcademicYear.hasMany(StudentEnrollment, { foreignKey: "academicYearId", as: "enrollments" });

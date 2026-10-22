@@ -17,8 +17,6 @@ export class StudentInterest extends Model<
   declare studentId: number;
   declare name: string;
   declare description: CreationOptional<string | null>;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
 }
 
 StudentInterest.init(
@@ -41,13 +39,9 @@ StudentInterest.init(
     },
 
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(255),
       allowNull: true,
     },
-
-    createdAt: DataTypes.DATE,
-
-    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,
@@ -56,6 +50,7 @@ StudentInterest.init(
 
     modelName: "StudentInterest",
 
-    timestamps: true,
+    // The ERD has no createdAt/updatedAt for this table.
+    timestamps: false,
   }
 );

@@ -26,9 +26,8 @@ export class SkillService {
 
   static async create(data: {
     name: string;
+    category?: string | null;
     description?: string | null;
-    createdAt?: Date;
-    updatedAt?: Date;
   }) {
     return Skill.create(data);
   }
@@ -39,6 +38,7 @@ export class SkillService {
     skill: Skill,
     data: Partial<{
       name: string;
+      category: string | null;
       description: string | null;
     }>
   ) {
