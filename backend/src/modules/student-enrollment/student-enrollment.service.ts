@@ -1,6 +1,7 @@
 import { StudentEnrollment } from "./student-enrollment.model";
 import { Student } from "../student/student.model";
 import { AcademicYear } from "../academic-year/academic-year.model";
+import { TrainingProgram } from "../training-program/training-program.model";
 
 export class StudentEnrollmentService {
 
@@ -15,11 +16,12 @@ export class StudentEnrollmentService {
     return StudentEnrollment.findByPk(id);
   }
 
-  // Two includes = two JOINs (student and academicYear). Aliases come from associations.ts.
+  // Three includes = three JOINs (student, trainingProgram and academicYear). Aliases come from associations.ts.
   static async findAllEagerly() {
     return StudentEnrollment.findAll({
       include: [
         { model: Student, as: "student" },
+        { model: TrainingProgram, as: "trainingProgram" },
         { model: AcademicYear, as: "academicYear" },
       ],
       order: [["id", "ASC"]],
