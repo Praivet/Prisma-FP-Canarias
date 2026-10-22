@@ -1,27 +1,33 @@
-import { Bicycle } from "../modules/bicycles/bicycle.model.js";
-import { Brand } from "../modules/brands/brand.model.js";
-import { BicycleDetail } from "../modules/bicycle-details/bicycle-detail.model.js";
-import { Order } from "../modules/orders/order.model.js";
-import { Customer } from "../modules/customers/customer.model.js";
-import { OrderItem } from "../modules/order-items/order-item.model.js"
+import { User } from '../../src/modules/user/user.model';
+import { Role } from '../../src/modules/role/role.model';
+import { Permission } from '../../src/modules/permission/permission.model';
+import { UserRole } from '../../src/modules/user-role/user-role.model';
+import { RolePermission } from '../../src/modules/role-permission/role-permission.model';
+import { AuthToken } from '../../src/modules/auth-token/auth-token.model';
+import { AuditLog } from '../../src/modules/audit-log/audit-log.model';
 
-export function defineAssociations() {
-  console.log("Associations defined"); 
-  Brand.hasMany(Bicycle, { foreignKey: "brandId", as: "bicycles" });
-  Bicycle.belongsTo(Brand, { foreignKey: "brandId", as: "brand" });
+// User - Role (N:M)
+User.belongsToMany(Role, { through: UserRole, foreignKey: 'userId', otherKey: 'roleId', as: 'roles' });
+Role.belongsToMany(User, { through: UserRole, foreignKey: 'roleId', otherKey: 'userId', as: 'users' });
 
-  Bicycle.hasOne(BicycleDetail,{foreignKey: "bicycleId", as: "detail", onDelete: "CASCADE"});
-  BicycleDetail.belongsTo(Bicycle, {foreignKey: "bicycleId", as: "bicycle"});
+// Role - Permission (N:M)
+Role.belongsToMany(Permission, {
+  through: RolePermission,
+  foreignKey: 'roleId',
+  otherKey: 'permissionId',
+  as: 'permissions',
+});
+Permission.belongsToMany(Role, {
+  through: RolePermission,
+  foreignKey: 'permissionId',
+  otherKey: 'roleId',
+  as: 'roles',
+});
 
-  Customer.hasMany(Order, { foreignKey: "customerId", as: "orders" });
-  Order.belongsTo(Customer, { foreignKey: "customerId", as: "customer" });
+// User - AuthToken (1:N)
+User.hasMany(AuthToken, { foreignKey: 'userId', as: 'authTokens' });
+AuthToken.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
-  Order.belongsToMany(Bicycle, {through: OrderItem, foreignKey: "orderId", otherKey: "bicycleId", as: "bicycles",});
-  Bicycle.belongsToMany(Order, {through: OrderItem, foreignKey: "bicycleId", otherKey: "orderId", as: "orders",});
-
-  Order.hasMany(OrderItem, { foreignKey: "orderId", as: "items" });
-  OrderItem.belongsTo(Order, { foreignKey: "orderId", as: "order" });
-
-  Bicycle.hasMany(OrderItem, { foreignKey: "bicycleId", as: "items" });
-  OrderItem.belongsTo(Bicycle, { foreignKey: "bicycleId", as: "bicycle" });
-}
+// User - AuditLog (1:N)
+User.hasMany(AuditLog, { foreignKey: 'userId', as: 'auditLogs' });
+AuditLog.belongsTo(User, { foreignKey: 'userId', as: 'user' });
