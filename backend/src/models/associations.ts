@@ -4,21 +4,16 @@ import { Student } from "../modules/student/student.model.js";
 import { StudentEnrollment } from "../modules/student-enrollment/student-enrollment.model.js";
 import { StudentInterest } from "../modules/student-interest/student-interest.model.js";
 import { StudentSkill } from "../modules/student-skill/student-skill.model.js";
+import { User } from '../../src/modules/user/user.model';
+import { Role } from '../../src/modules/role/role.model';
+import { Permission } from '../../src/modules/permission/permission.model';
+import { UserRole } from '../../src/modules/user-role/user-role.model';
+import { RolePermission } from '../../src/modules/role-permission/role-permission.model';
+import { AuthToken } from '../../src/modules/auth-token/auth-token.model';
+import { AuditLog } from '../../src/modules/audit-log/audit-log.model';
 
-/* TODO: uncomment when these models are implemented (their files are still empty).
-
- import { User } from "../modules/user/user.model.js";
- import { TrainingProgram } from "../modules/training-program/training-program.model.js";
- import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
- import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
-
-*/
 export function defineAssociations() {
   console.log("Associations defined");
-
-  // 1:1 User -> Student. The FK (userId, unique) is in students.
-  // User.hasOne(Student, { foreignKey: "userId", as: "student", onDelete: "CASCADE" });
-  // Student.belongsTo(User, { foreignKey: "userId", as: "user" });
 
   // 1:N Student -> StudentEnrollment
   Student.hasMany(StudentEnrollment, { foreignKey: "studentId", as: "enrollments", onDelete: "CASCADE" });
@@ -48,10 +43,31 @@ export function defineAssociations() {
   Skill.hasMany(StudentSkill, { foreignKey: "skillId", as: "studentSkills" });
   StudentSkill.belongsTo(Skill, { foreignKey: "skillId", as: "skill" });
 
-  // 1:N EducationalCenter -> TrainingProgram and ProfessionalFamily -> TrainingProgram
-  // (not part of these six entities, ready for whoever implements TrainingProgram).
-  // EducationalCenter.hasMany(TrainingProgram, { foreignKey: "educationalCenterId", as: "trainingPrograms" });
-  // TrainingProgram.belongsTo(EducationalCenter, { foreignKey: "educationalCenterId", as: "educationalCenter" });
-  // ProfessionalFamily.hasMany(TrainingProgram, { foreignKey: "professionalFamilyId", as: "trainingPrograms" });
-  // TrainingProgram.belongsTo(ProfessionalFamily, { foreignKey: "professionalFamilyId", as: "professionalFamily" });
-}
+  //------ Kacper
+  
+  // User - Role (N:M)
+  User.belongsToMany(Role, { through: UserRole, foreignKey: 'userId', otherKey: 'roleId', as: 'roles' });
+  Role.belongsToMany(User, { through: UserRole, foreignKey: 'roleId', otherKey: 'userId', as: 'users' });
+
+  // Role - Permission (N:M)
+  Role.belongsToMany(Permission, {
+    through: RolePermission,
+    foreignKey: 'roleId',
+    otherKey: 'permissionId',
+    as: 'permissions',
+  });
+  Permission.belongsToMany(Role, {
+    through: RolePermission,
+    foreignKey: 'permissionId',
+    otherKey: 'roleId',
+    as: 'roles',
+  });
+
+  // User - AuthToken (1:N)
+  User.hasMany(AuthToken, { foreignKey: 'userId', as: 'authTokens' });
+  AuthToken.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+  // User - AuditLog (1:N)
+  User.hasMany(AuditLog, { foreignKey: 'userId', as: 'auditLogs' });
+  AuditLog.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+  }
