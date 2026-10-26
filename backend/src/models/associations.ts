@@ -4,6 +4,7 @@ import { Student } from "../modules/student/student.model.js";
 import { StudentEnrollment } from "../modules/student-enrollment/student-enrollment.model.js";
 import { StudentInterest } from "../modules/student-interest/student-interest.model.js";
 import { StudentSkill } from "../modules/student-skill/student-skill.model.js";
+
 import { User } from '../../src/modules/user/user.model';
 import { Role } from '../../src/modules/role/role.model';
 import { Permission } from '../../src/modules/permission/permission.model';
