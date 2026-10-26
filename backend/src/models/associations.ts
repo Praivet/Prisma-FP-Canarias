@@ -87,7 +87,7 @@ export function defineAssociations() {
 
   SurveyQuestion.hasMany(SurveyAnswer, { foreignKey: "questionId", as: "answers", onDelete: "CASCADE" }); //1:N
   SurveyAnswer.belongsTo(SurveyQuestion, { foreignKey: "questionId", as: "question" }); //N:1
-}
+
 
 
   // 1:N Student -> StudentEnrollment
