@@ -19,7 +19,7 @@ import studentSkillRoutes from "../modules/student-skill/student-skill.routes";
 import trainingProgramRoutes from "../modules/training-program/training-program.routes";
 import tutorAssignmentRoutes from "../modules/tutor-assignament/tutor-assignament.routes";
 
-
+const router = Router();
 // Every new module must be mounted here (and its model imported in associations.ts).
 router.use("/academic-years", academicYearRoutes);
 router.use("/skills", skillRoutes);
@@ -43,6 +43,6 @@ router.use("/survey-answers", surveyAnswerRoutes);
 
 
 
-const router = Router();
+
 
 export default router;
