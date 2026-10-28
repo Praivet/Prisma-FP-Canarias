@@ -5,13 +5,13 @@ import { StudentEnrollment } from "../modules/student-enrollment/student-enrollm
 import { StudentInterest } from "../modules/student-interest/student-interest.model.js";
 import { StudentSkill } from "../modules/student-skill/student-skill.model.js";
 
-import { User } from '../../src/modules/user/user.model';
-import { Role } from '../../src/modules/role/role.model';
-import { Permission } from '../../src/modules/permission/permission.model';
-import { UserRole } from '../../src/modules/user-role/user-role.model';
-import { RolePermission } from '../../src/modules/role-permission/role-permission.model';
-import { AuthToken } from '../../src/modules/auth-token/auth-token.model';
-import { AuditLog } from '../../src/modules/audit-log/audit-log.model';
+import { User } from "../modules/user/user.model.js";
+import { Role } from "../modules/role/role.model.js";
+import { Permission } from "../modules/permission/permission.model.js";
+import { UserRole } from "../modules/user-role/user-role.model.js";
+import { RolePermission } from "../modules/role-permission/role-permission.model.js";
+import { AuthToken } from "../modules/auth-token/auth-token.model.js";
+import { AuditLog } from "../modules/audit-log/audit-log.model.js";
 
 export function defineAssociations() {
   console.log("Associations defined");
@@ -19,11 +19,6 @@ export function defineAssociations() {
   // 1:N Student -> StudentEnrollment
   Student.hasMany(StudentEnrollment, { foreignKey: "studentId", as: "enrollments", onDelete: "CASCADE" });
   StudentEnrollment.belongsTo(Student, { foreignKey: "studentId", as: "student" });
-
-  // 1:N TrainingProgram -> StudentEnrollment
-  // The FK is called programId in the ERD.
-  // TrainingProgram.hasMany(StudentEnrollment, { foreignKey: "programId", as: "enrollments" });
-  // StudentEnrollment.belongsTo(TrainingProgram, { foreignKey: "programId", as: "trainingProgram" });
 
   // 1:N AcademicYear -> StudentEnrollment
   AcademicYear.hasMany(StudentEnrollment, { foreignKey: "academicYearId", as: "enrollments" });
