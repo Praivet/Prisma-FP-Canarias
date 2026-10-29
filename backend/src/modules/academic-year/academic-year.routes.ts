@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AcademicYearController } from "./academic-year.controller";
+import { AcademicYearController } from "./academic-year.controller.js";
 
 const router = Router();
 

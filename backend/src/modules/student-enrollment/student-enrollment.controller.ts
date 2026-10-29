@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { StudentEnrollmentService } from "./student-enrollment.service";
+import { StudentEnrollmentService } from "./student-enrollment.service.js";
 
 export class StudentEnrollmentController {
 

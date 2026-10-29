@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'Many' side of three 1:N: Student, TrainingProgram and AcademicYear -> StudentEnrollment.
 // It holds the three FKs (studentId, programId, academicYearId).

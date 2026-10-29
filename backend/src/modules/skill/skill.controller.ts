@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { SkillService } from "./skill.service";
+import { SkillService } from "./skill.service.js";
 
 export class SkillController {
 

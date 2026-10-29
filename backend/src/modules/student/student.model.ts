@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'One' side of 1:N Student -> StudentEnrollment and Student -> StudentInterest,
 // and one side of the N:M Student <-> Skill (through StudentSkill).

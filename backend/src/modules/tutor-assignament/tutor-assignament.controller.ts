@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { TutorAssignmentService } from "./tutor-assignament.service";
+import { TutorAssignmentService } from "./tutor-assignament.service.js";
 
 export class TutorAssignmentController {
 

@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // One side of the N:M Student <-> Skill. The FKs live in the join table (StudentSkill).
 export class Skill extends Model<

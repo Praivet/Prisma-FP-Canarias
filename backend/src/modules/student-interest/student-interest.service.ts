@@ -1,4 +1,4 @@
-import { StudentInterest } from "./student-interest.model";
+import { StudentInterest } from "./student-interest.model.js";
 
 export class StudentInterestService {
 

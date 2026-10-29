@@ -1,6 +1,6 @@
-import { TutorAssignment } from "./tutor-assignament.model";
-import { TrainingProgram } from "../training-program/training-program.model";
-import { AcademicYear } from "../academic-year/academic-year.model";
+import { TutorAssignment } from "./tutor-assignament.model.js";
+import { TrainingProgram } from "../training-program/training-program.model.js";
+import { AcademicYear } from "../academic-year/academic-year.model.js";
 
 export class TutorAssignmentService {
 

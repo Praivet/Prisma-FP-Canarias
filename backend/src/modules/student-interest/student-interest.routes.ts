@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { StudentInterestController } from "./student-interest.controller";
+import { StudentInterestController } from "./student-interest.controller.js";
 
 const router = Router();
 
