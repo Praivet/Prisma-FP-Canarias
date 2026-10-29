@@ -7,7 +7,7 @@ import { app } from "../src/app";
 describe("API", () => {
   it("GET / responds 200", async () => {
     const res = await request(app).get("/");
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(200);
     expect(res.body.message).toBe("API working");
   });
 
