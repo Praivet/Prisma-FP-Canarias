@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { TrainingProgramService } from "./training-program.service";
+import { TrainingProgramService } from "./training-program.service.js";
 
 export class TrainingProgramController {
 

@@ -1,5 +1,5 @@
-import { AcademicYear } from "./academic-year.model";
-import { StudentEnrollment } from "../student-enrollment/student-enrollment.model";
+import { AcademicYear } from "./academic-year.model.js";
+import { StudentEnrollment } from "../student-enrollment/student-enrollment.model.js";
 
 export class AcademicYearService {
 

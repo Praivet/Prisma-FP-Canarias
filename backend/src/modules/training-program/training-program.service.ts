@@ -1,6 +1,6 @@
-import { TrainingProgram } from "./training-program.model";
-import { StudentEnrollment } from "../student-enrollment/student-enrollment.model";
-import { TutorAssignment } from "../tutor-assignament/tutor-assignament.model";
+import { TrainingProgram } from "./training-program.model.js";
+import { StudentEnrollment } from "../student-enrollment/student-enrollment.model.js";
+import { TutorAssignment } from "../tutor-assignament/tutor-assignament.model.js";
 
 export class TrainingProgramService {
 

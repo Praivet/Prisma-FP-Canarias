@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'One' side of 1:N AcademicYear -> StudentEnrollment. No FK here: the FK (academicYearId) is in StudentEnrollment.
 export class AcademicYear extends Model<

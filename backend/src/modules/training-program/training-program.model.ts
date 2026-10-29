@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'Many' side of 1:N ProfessionalFamily -> TrainingProgram and EducationalCenter -> TrainingProgram.
 // 'One' side of 1:N TrainingProgram -> StudentEnrollment and TrainingProgram -> TutorAssignment.

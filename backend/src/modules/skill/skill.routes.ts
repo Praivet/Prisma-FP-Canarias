@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SkillController } from "./skill.controller";
+import { SkillController } from "./skill.controller.js";
 
 const router = Router();
 

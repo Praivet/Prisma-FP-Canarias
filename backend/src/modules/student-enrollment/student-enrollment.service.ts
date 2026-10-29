@@ -1,7 +1,7 @@
-import { StudentEnrollment } from "./student-enrollment.model";
-import { Student } from "../student/student.model";
-import { AcademicYear } from "../academic-year/academic-year.model";
-import { TrainingProgram } from "../training-program/training-program.model";
+import { StudentEnrollment } from "./student-enrollment.model.js";
+import { Student } from "../student/student.model.js";
+import { AcademicYear } from "../academic-year/academic-year.model.js";
+import { TrainingProgram } from "../training-program/training-program.model.js";
 
 export class StudentEnrollmentService {
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AcademicYearService } from "./academic-year.service";
+import { AcademicYearService } from "./academic-year.service.js";
 
 export class AcademicYearController {
 

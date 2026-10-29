@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { TrainingProgramController } from "./training-program.controller";
+import { TrainingProgramController } from "./training-program.controller.js";
 
 const router = Router();
 

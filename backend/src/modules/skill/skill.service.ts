@@ -1,5 +1,5 @@
-import { Skill } from "./skill.model";
-import { Student } from "../student/student.model";
+import { Skill } from "./skill.model.js";
+import { Student } from "../student/student.model.js";
 
 export class SkillService {
 
