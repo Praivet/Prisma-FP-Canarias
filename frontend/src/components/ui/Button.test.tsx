@@ -17,4 +17,5 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveClass('bg-red-600')
   })
 })
+
 //Remember to run the tests using the command: npm run lint && npm test && npm run build
