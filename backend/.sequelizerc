@@ -1,0 +1,9 @@
+// sequelize-cli lee este archivo al arrancar: le dice dónde están el config,
+// las migraciones y los seeders. Sin él los buscaría en config/, migrations/ y seeders/.
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("database", "ivan", "config.cjs"),
+  "migrations-path": path.resolve("database", "ivan", "migrations"),
+  "seeders-path": path.resolve("database", "ivan", "seeders"),
+};

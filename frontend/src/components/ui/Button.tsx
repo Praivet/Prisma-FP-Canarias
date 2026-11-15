@@ -1,7 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react'
 
-interface ButtonProps
-    extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'danger'
 }
 
@@ -11,17 +10,11 @@ const variants = {
     danger: 'bg-red-600 hover:bg-red-700 text-white',
 }
 
-function Button({
-    variant = 'primary',
-    className = '',
-    children,
-    ...props
-}: ButtonProps) {
-    const variantClasses = variants[variant] || ''
-    const combinedClasses = `${variantClasses} ${className}`.trim()
+function Button({ variant = 'primary', className = '', children, ...props }: ButtonProps) {
+    const combined = `${variants[variant] || ''} ${className}`.trim()
 
     return (
-        <button className={combinedClasses} {...props}>
+        <button className={combined} {...props}>
             {children}
         </button>
     )

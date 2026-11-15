@@ -1,9 +1,23 @@
-import { StudentInterest } from "./student-interest.model";
+import { Op } from "sequelize";
+import { StudentInterest } from "./student-interest.model.js";
+import { Student } from "../student/student.model.js";
 
 export class StudentInterestService {
 
   static async findAll() {
     return StudentInterest.findAll({
+      order: [["id", "ASC"]],
+    });
+  }
+
+
+  // CONSULTA Q14: intereses cuyo nombre CONTIENE un texto, con el alumno al que pertenecen.
+  // [Op.iLike] = como Op.like pero sin distinguir mayúsculas (solo PostgreSQL).
+  // `%${text}%` = contiene; `${text}%` = empieza por; `%${text}` = termina en.
+  static async findAllByNameContaining(text: string) {
+    return StudentInterest.findAll({
+      where: { name: { [Op.iLike]: `%${text}%` } },
+      include: [{ model: Student, as: "student", attributes: ["firstName", "lastName"] }],
       order: [["id", "ASC"]],
     });
   }

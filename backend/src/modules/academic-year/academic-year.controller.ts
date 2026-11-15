@@ -1,7 +1,25 @@
 import { Request, Response, NextFunction } from "express";
-import { AcademicYearService } from "./academic-year.service";
+import { AcademicYearService } from "./academic-year.service.js";
 
 export class AcademicYearController {
+
+  // CONSULTA Q13: GET /api/academic-years/active/eagerly. Devuelve UNO, así que lleva 404 si no hay.
+  static async getActiveEagerly(req: Request, res: Response, next: NextFunction) {
+    try {
+      const academicYear = await AcademicYearService.findActiveEagerly();
+
+      if (!academicYear) {
+        res.status(404).json({ message: "No active academic year" });
+
+        return;
+      }
+
+      res.json(academicYear);
+    } catch (error) {
+      next(error);
+    }
+  }
+
 
   static async getAll(
     req: Request,

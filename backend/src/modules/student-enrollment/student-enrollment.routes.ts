@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { StudentEnrollmentController } from "./student-enrollment.controller";
+import { StudentEnrollmentController } from "./student-enrollment.controller.js";
 
 const router = Router();
 
@@ -7,6 +7,18 @@ router.get("/", StudentEnrollmentController.getAll);
 
 // Specific routes go before "/:id" so Express does not take "eagerly" as an id.
 router.get("/eagerly", StudentEnrollmentController.getAllEagerly);
+
+router.get("/eagerly/student-program", StudentEnrollmentController.getAllWithStudentAndProgram);
+
+router.get("/before/:date", StudentEnrollmentController.getAllBefore);
+
+router.get("/status/:status", StudentEnrollmentController.getAllByStatus);
+
+router.get("/between/:from/:to", StudentEnrollmentController.getAllBetween);
+
+router.get("/with-notes", StudentEnrollmentController.getAllWithNotes);
+
+router.get("/eagerly/academic-year/:academicYearName", StudentEnrollmentController.getAllEagerlyByAcademicYearName);
 
 router.get("/student/:studentId", StudentEnrollmentController.getByStudentId);
 

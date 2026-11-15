@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { StudentController } from "./student.controller";
+import { StudentController } from "./student.controller.js";
 
 const router = Router();
 
@@ -7,6 +7,21 @@ router.get("/", StudentController.getAll);
 
 // Eager endpoint: GET /:id/eagerly returns the entity with its associations.
 router.get("/:id/eagerly", StudentController.getEagerlyById);
+
+// Rutas con un texto fijo ("search", "eagerly") antes de "/:id", para que Express no las tome como un id.
+router.get("/search/:lastNameSearch", StudentController.getAllByLastNameWithEnrollments);
+
+router.get("/eagerly/skill/:skillName", StudentController.getAllEagerlyBySkillName);
+
+router.get("/born-after/:date", StudentController.getAllBornAfter);
+
+router.get("/enrolled/level/:level", StudentController.getAllEnrolledByProgramLevel);
+
+router.get("/eagerly/skills-level/:level", StudentController.getAllWithSkillsAtLevel);
+
+router.get("/eagerly/skills-interests", StudentController.getAllWithSkillsAndInterests);
+
+router.get("/:id/user", StudentController.getWithUserById);
 
 router.get("/:id", StudentController.getById);
 

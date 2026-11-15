@@ -1,7 +1,7 @@
 import { DataTypes, ForeignKey, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
-import { sequelize } from '../../config/database';
-import { Role } from '../role/role.model';
-import { Permission } from '../permission/permission.model'
+import { sequelize } from '../../config/database.js';
+import { Role } from '../role/role.model.js';
+import { Permission } from '../permission/permission.model.js'
 
 export class RolePermission extends Model<
   InferAttributes<RolePermission>,

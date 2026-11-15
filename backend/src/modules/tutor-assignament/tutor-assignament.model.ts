@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // Not a join table: an entity with three FKs, each one the 'many' side of a 1:N
 // from User (tutorId), TrainingProgram (programId) and AcademicYear (academicYearId).

@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import apiRouter from "./routes";
-import { notFoundMiddleware } from "./middlewares/not-found.middleware";
-import { errorMiddleware } from "./middlewares/error.middleware";
+import apiRouter from "./routes/index.js";
+import { notFoundMiddleware } from "./middlewares/not-found.middleware.js";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 export const app = express();
 
@@ -12,7 +12,7 @@ app.use(cors())
 
 app.get("/", (req, res) => {
   res.json({
-    message: "API funcionando",
+    message: "API working",
   });
 });
 

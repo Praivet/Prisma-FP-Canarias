@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'Many' side of three 1:N: Student, TrainingProgram and AcademicYear -> StudentEnrollment.
 // It holds the three FKs (studentId, programId, academicYearId).
@@ -21,6 +21,8 @@ export class StudentEnrollment extends Model<
   declare enrollmentDate: CreationOptional<Date>;
   declare graduationDate: CreationOptional<Date | null>;
   declare status: CreationOptional<string>;
+  // EJEMPLO (migración add-notes): columna normal que puede ser null.
+  declare notes: CreationOptional<string | null>;
 }
 
 StudentEnrollment.init(
@@ -65,6 +67,12 @@ StudentEnrollment.init(
       type: DataTypes.STRING(30),
       allowNull: false,
       defaultValue: "enrolled",
+    },
+
+    // TEXT = texto largo. Mismo tipo y allowNull que en la migración.
+    notes: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
   },
   {

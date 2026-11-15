@@ -1,11 +1,26 @@
-import { TutorAssignment } from "./tutor-assignament.model";
-import { TrainingProgram } from "../training-program/training-program.model";
-import { AcademicYear } from "../academic-year/academic-year.model";
+import { TutorAssignment } from "./tutor-assignament.model.js";
+import { TrainingProgram } from "../training-program/training-program.model.js";
+import { AcademicYear } from "../academic-year/academic-year.model.js";
+import { User } from "../user/user.model.js";
 
 export class TutorAssignmentService {
 
   static async findAll() {
     return TutorAssignment.findAll({
+      order: [["id", "ASC"]],
+    });
+  }
+
+
+  // CONSULTA Q16: asignaciones de un tutor buscándolo por su EMAIL, con el ciclo y el curso.
+  // El email está en users -> where dentro del include de User (alias "tutor", porque la FK es tutorId).
+  static async findAllByTutorEmail(email: string) {
+    return TutorAssignment.findAll({
+      include: [
+        { model: User, as: "tutor", where: { email }, attributes: ["id", "email"] },
+        { model: TrainingProgram, as: "trainingProgram", attributes: ["name", "code"] },
+        { model: AcademicYear, as: "academicYear", attributes: ["name"] },
+      ],
       order: [["id", "ASC"]],
     });
   }

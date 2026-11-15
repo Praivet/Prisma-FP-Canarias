@@ -1,7 +1,17 @@
 import { Request, Response, NextFunction } from "express";
-import { StudentInterestService } from "./student-interest.service";
+import { StudentInterestService } from "./student-interest.service.js";
 
 export class StudentInterestController {
+
+  // CONSULTA Q14: GET /api/student-interests/search/:text -> p. ej. /search/desarrollo
+  static async getAllByNameContaining(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await StudentInterestService.findAllByNameContaining(String(req.params.text)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
 
   static async getAll(
     req: Request,

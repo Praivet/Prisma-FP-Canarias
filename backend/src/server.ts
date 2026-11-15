@@ -1,7 +1,7 @@
 import { defineAssociations } from "./models/associations.js";
-import { app } from "./app";
-import { sequelize } from "./config/database";
-import { env } from "./config/env";
+import { app } from "./app.js";
+import { sequelize } from "./config/database.js";
+import { env } from "./config/env.js";
 
 async function startServer() {
   try {
@@ -12,11 +12,9 @@ async function startServer() {
 
 
 
-    console.log("Conexión con MySQL establecida.");
+    console.log("Conexión con PostgreSQL establecida.");
 
-    //await sequelize.sync();
-
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
 
     console.log("Modelos sincronizados.");
 
@@ -37,4 +35,4 @@ async function startServer() {
   }
 }
 
-startServer();
+startServer();

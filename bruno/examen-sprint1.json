@@ -1,0 +1,1134 @@
+{
+  "version": "1",
+  "name": "examen-sprint1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "1 Ciclos (training-programs)",
+      "root": {
+        "meta": {
+          "name": "1 Ciclos (training-programs)",
+          "seq": 1
+        }
+      },
+      "items": [
+        {
+          "type": "http-request",
+          "seq": 1,
+          "name": "Q1 ciclos con familia y centro (2 include)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/training-programs/eagerly/family-center",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 5",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 2,
+          "name": "Q2 ciclos de la familia IFC (where en include)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/training-programs/eagerly/family/IFC",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        }
+      ],
+      "seq": 1
+    },
+    {
+      "type": "folder",
+      "name": "2 Alumnos (students)",
+      "root": {
+        "meta": {
+          "name": "2 Alumnos (students)",
+          "seq": 2
+        }
+      },
+      "items": [
+        {
+          "type": "http-request",
+          "seq": 1,
+          "name": "Q3 nacidos después de 2005-01-01 (Op.gt)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/students/born-after/2005-01-01",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 1",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 2,
+          "name": "Q4 matriculados en Grado Superior (include anidado)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/students/enrolled/level/Grado Superior",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 1",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 3,
+          "name": "Q8 con skills de nivel advanced (through.where)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/students/eagerly/skills-level/advanced",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 4,
+          "name": "Q9 con skills e intereses (2 include)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/students/eagerly/skills-interests",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        }
+      ],
+      "seq": 2
+    },
+    {
+      "type": "folder",
+      "name": "3 Matrículas (student-enrollments)",
+      "root": {
+        "meta": {
+          "name": "3 Matrículas (student-enrollments)",
+          "seq": 3
+        }
+      },
+      "items": [
+        {
+          "type": "http-request",
+          "seq": 1,
+          "name": "Q5 matrículas con alumno y ciclo (attributes)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/student-enrollments/eagerly/student-program",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 5",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 2,
+          "name": "Q6 antes de 2025-09-10 (Op.lt)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/student-enrollments/before/2025-09-10",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 3,
+          "name": "Q10 con estado enrolled (where simple)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/student-enrollments/status/enrolled",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 4,
+          "name": "Q11 entre dos fechas (Op.between)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/student-enrollments/between/2025-01-01/2025-12-31",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 2",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 5,
+          "name": "Q12 con observaciones (Op.ne null)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/student-enrollments/with-notes",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 2",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        }
+      ],
+      "seq": 3
+    },
+    {
+      "type": "folder",
+      "name": "4 Skills",
+      "root": {
+        "meta": {
+          "name": "4 Skills",
+          "seq": 4
+        }
+      },
+      "items": [
+        {
+          "type": "http-request",
+          "seq": 1,
+          "name": "Q7 skills de alumnos enrolled en IFC-DAW (3 saltos)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/skills/eagerly/status/enrolled/program/IFC-DAW",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 5",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 2,
+          "name": "Q15 skills de la categoría Systems",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/skills/category/Systems",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 3",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        }
+      ],
+      "seq": 4
+    },
+    {
+      "type": "folder",
+      "name": "5 Cursos, intereses y tutores",
+      "root": {
+        "meta": {
+          "name": "5 Cursos, intereses y tutores",
+          "seq": 5
+        }
+      },
+      "items": [
+        {
+          "type": "http-request",
+          "seq": 1,
+          "name": "Q13 curso activo con matrículas y tutorías (findOne)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/academic-years/active/eagerly",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.isActive",
+                "value": "eq true",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 2,
+          "name": "Q14 intereses que contienen \"desarrollo\" (Op.iLike)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/student-interests/search/desarrollo",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 1",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        },
+        {
+          "type": "http-request",
+          "seq": 3,
+          "name": "Q16 tutorías de carmen (where en include con alias tutor)",
+          "tags": [],
+          "request": {
+            "url": "{{baseUrl}}/tutor-assignments/eagerly/tutor-email/carmen@prismafp.test",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "auth": {
+              "mode": "none",
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "ntlm": null,
+              "oauth2": null,
+              "wsse": null,
+              "apikey": null,
+              "akamaiEdgegrid": null
+            },
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "sparql": null,
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "graphql": null,
+              "file": []
+            },
+            "script": {
+              "req": null,
+              "res": null
+            },
+            "vars": {
+              "req": [],
+              "res": []
+            },
+            "assertions": [
+              {
+                "name": "res.status",
+                "value": "eq 200",
+                "enabled": true
+              },
+              {
+                "name": "res.body.length",
+                "value": "eq 2",
+                "enabled": true
+              }
+            ],
+            "tests": null,
+            "docs": null
+          },
+          "settings": {
+            "encodeUrl": true,
+            "timeout": 0,
+            "followRedirects": true,
+            "maxRedirects": 5,
+            "forwardAuthorizationHeader": true
+          },
+          "examples": []
+        }
+      ],
+      "seq": 5
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "vars": {
+        "req": [
+          {
+            "name": "baseUrl",
+            "value": "http://localhost:3000/api",
+            "enabled": true
+          }
+        ]
+      }
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "examen-sprint1",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}

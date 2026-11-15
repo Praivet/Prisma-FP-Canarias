@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'Many' side of 1:N Student -> StudentInterest. It holds the FK (studentId).
 export class StudentInterest extends Model<

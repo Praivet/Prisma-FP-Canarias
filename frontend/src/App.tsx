@@ -1,6 +1,7 @@
-import BicyclesPage from './features/bicycles/pages/BicyclesPage'
+import StudentsPage from './features/prismaFP/pages/StudentsPage'
 
 function App() {
-  return <BicyclesPage />
+    return <StudentsPage />
 }
+
 export default App

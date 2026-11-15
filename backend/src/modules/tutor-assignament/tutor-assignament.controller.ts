@@ -1,7 +1,17 @@
 import { Request, Response, NextFunction } from "express";
-import { TutorAssignmentService } from "./tutor-assignament.service";
+import { TutorAssignmentService } from "./tutor-assignament.service.js";
 
 export class TutorAssignmentController {
+
+  // CONSULTA Q16: GET /api/tutor-assignments/eagerly/tutor-email/:email -> p. ej. /eagerly/tutor-email/javier@prismafp.test
+  static async getAllByTutorEmail(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await TutorAssignmentService.findAllByTutorEmail(String(req.params.email)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
 
   static async getAll(
     req: Request,

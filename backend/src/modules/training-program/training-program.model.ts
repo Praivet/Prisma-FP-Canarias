@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // 'Many' side of 1:N ProfessionalFamily -> TrainingProgram and EducationalCenter -> TrainingProgram.
 // 'One' side of 1:N TrainingProgram -> StudentEnrollment and TrainingProgram -> TutorAssignment.
@@ -15,6 +15,9 @@ export class TrainingProgram extends Model<
   InferCreationAttributes<TrainingProgram>
 > {
   declare id: CreationOptional<number>;
+  // FK obligatoria (no null) = number en el declare + allowNull: false en el init.
+  // Si una FK pudiera ser null sería: CreationOptional<number | null> + allowNull: true.
+  // (declare = tipos de TypeScript: number, string. init = tipos de Sequelize: DataTypes.INTEGER...)
   declare familyId: number;
   declare centerId: number;
   declare name: string;

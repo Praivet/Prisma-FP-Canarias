@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import { sequelize } from "../../config/database";
+import { sequelize } from "../../config/database.js";
 
 // One side of the N:M Student <-> Skill. The FKs live in the join table (StudentSkill).
 export class Skill extends Model<
@@ -33,8 +33,9 @@ Skill.init(
       unique: true,
     },
 
+    // EJEMPLO (migración change-skill-category-length): antes STRING(100).
     category: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(150),
       allowNull: true,
     },
 

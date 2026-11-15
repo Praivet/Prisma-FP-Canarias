@@ -6,9 +6,9 @@ import {
   InferCreationAttributes,
   Model,
 } from 'sequelize';
-import { sequelize } from '../../config/database';
-import { User } from '../user/user.model';
-import { Role } from '../role/role.model';
+import { sequelize } from '../../config/database.js';
+import { User } from '../user/user.model.js';
+import { Role } from '../role/role.model.js';
 
 export class UserRole extends Model<InferAttributes<UserRole>, InferCreationAttributes<UserRole>> {
   declare userId: ForeignKey<User['id']>;

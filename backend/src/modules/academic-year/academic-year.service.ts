@@ -1,11 +1,26 @@
-import { AcademicYear } from "./academic-year.model";
-import { StudentEnrollment } from "../student-enrollment/student-enrollment.model";
+import { AcademicYear } from "./academic-year.model.js";
+import { StudentEnrollment } from "../student-enrollment/student-enrollment.model.js";
+import { TutorAssignment } from "../tutor-assignament/tutor-assignament.model.js";
 
 export class AcademicYearService {
 
   static async findAll() {
     return AcademicYear.findAll({
       order: [["id", "ASC"]],
+    });
+  }
+
+
+  // CONSULTA Q13: el curso activo (isActive = true) con sus matrículas y sus asignaciones de tutor.
+  // where en el principal (AcademicYear) + dos include de los dos hasMany que tiene.
+  // findOne = el primero que cumpla el where (devuelve un objeto o null, no un array).
+  static async findActiveEagerly() {
+    return AcademicYear.findOne({
+      where: { isActive: true },
+      include: [
+        { model: StudentEnrollment, as: "enrollments", attributes: ["id", "studentId", "status"] },
+        { model: TutorAssignment, as: "tutorAssignments", attributes: ["id", "tutorId", "programId"] },
+      ],
     });
   }
 

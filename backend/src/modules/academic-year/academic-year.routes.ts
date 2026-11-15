@@ -1,9 +1,12 @@
 import { Router } from "express";
-import { AcademicYearController } from "./academic-year.controller";
+import { AcademicYearController } from "./academic-year.controller.js";
 
 const router = Router();
 
 router.get("/", AcademicYearController.getAll);
+
+// Texto fijo ("active") antes de "/:id".
+router.get("/active/eagerly", AcademicYearController.getActiveEagerly);
 
 // Eager endpoint: GET /:id/eagerly returns the entity with its associations.
 router.get("/:id/eagerly", AcademicYearController.getEagerlyById);

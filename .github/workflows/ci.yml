@@ -1,0 +1,80 @@
+# .github/workflows/ci.yml
+# Continuous Integration for PRISMA FP Canarias.
+# Runs on every PR to main, develop or stagging and on every push to those branches.
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop, stagging]
+  push:
+    branches: [main, develop, stagging]
+
+# If a new commit is pushed to the same PR, cancel the previous run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Minimum permissions: the workflow only needs to read the code.
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    # This name is the one you will select as a required check (step 5).
+    name: Backend (lint, types and tests)
+    runs-on: ubuntu-latest # Virtual Machine where he is going to run the job
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm test
+
+  frontend:
+    name: Frontend (lint, tests and build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tests
+        run: npm test
+
+      # build = tsc -b (types) + vite build
+      - name: Build
+        run: npm run build
