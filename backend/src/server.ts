@@ -12,11 +12,9 @@ async function startServer() {
 
 
 
-    console.log("Conexión con MySQL establecida.");
+    console.log("Conexión con PostgreSQL establecida.");
 
-    //await sequelize.sync();
-
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
 
     console.log("Modelos sincronizados.");
 
@@ -37,4 +35,4 @@ async function startServer() {
   }
 }
 
-startServer();
+startServer();

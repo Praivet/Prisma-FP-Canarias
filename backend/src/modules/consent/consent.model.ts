@@ -13,7 +13,6 @@ export class Consent extends Model<
 > {
     declare id: CreationOptional<number>;
     declare studentId: number;
-    // FK opcional: puede ser null (relación 0..1 a N en el ERD)
     declare consentRequestId: CreationOptional<number | null>;
     declare purpose: string;
     declare status: "granted" | "denied" | "revoked";

@@ -60,7 +60,6 @@ export class ConsentController {
                 });
                 return;
             }
-            // La FK es opcional: solo se comprueba si viene con valor
             if (
                 consentRequestId !== undefined &&
                 consentRequestId !== null &&

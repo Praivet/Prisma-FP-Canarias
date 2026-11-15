@@ -89,7 +89,6 @@ export class CompanyController {
                     return;
                 }
             }
-            //... is an operator from js and ts, any questions -> ask me (jp)
             const updatedCompany = await CompanyService.update(company, {
                 ...(taxId !== undefined && { taxId }),
                 ...(name !== undefined && { name }),

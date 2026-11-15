@@ -1,7 +1,6 @@
 import { ConsentRequest } from "./consent-request.model.js";
 import { Student } from "../student/student.model.js";
-// TODO: descomentar cuando el modelo User esté hecho (user.model.ts sigue vacío)
-// import { User } from "../user/user.model.js";
+import { User } from "../user/user.model.js";
 
 const includeStudent = {
     model: Student,
@@ -25,11 +24,10 @@ export class ConsentRequestService {
         const student = await Student.findByPk(studentId);
         return student !== null;
     }
-    // TODO: descomentar cuando exista User
-    // static async userExists(userId: number) {
-    //     const user = await User.findByPk(userId);
-    //     return user !== null;
-    // }
+    static async userExists(userId: number) {
+        const user = await User.findByPk(userId);
+        return user !== null;
+    }
     static async tokenHashExists(tokenHash: string) {
         const consentRequest = await ConsentRequest.findOne({ where: { tokenHash } });
         return consentRequest !== null;
