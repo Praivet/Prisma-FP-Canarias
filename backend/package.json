@@ -9,7 +9,11 @@
     "start": "node dist/server.js",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:migrate": "cd database && cross-env NODE_ENV=development sequelize-cli db:migrate",
+    "db:migrate:undo": "cd database && cross-env NODE_ENV=development sequelize-cli db:migrate:undo:all",
+    "db:seed": "cd database && cross-env NODE_ENV=development sequelize-cli db:seed:all",
+    "db:seed:undo": "cd database && cross-env NODE_ENV=development sequelize-cli db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
