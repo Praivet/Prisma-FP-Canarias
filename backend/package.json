@@ -9,7 +9,9 @@
     "start": "node dist/server.js",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:migrations": "cross-env NODE_ENV=development tsx scripts/schema-sync.ts migrate",
+    "db:seeders": "cross-env NODE_ENV=development sequelize-cli db:seed:all --options-path database/.sequelizerc"
   },
   "keywords": [],
   "author": "",

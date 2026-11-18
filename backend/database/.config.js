@@ -23,10 +23,10 @@ function getConfig(environment){
         migrationStorage: "sequelize",
         seederStorage: "sequelize"
     };
-
-    module.exports = {
-        development: getConfig("development"),
-        test: getConfig("test"),
-        production: getConfig("production")
-    };
 }
+
+module.exports = {
+    development: getConfig("development"),
+    test: getConfig("test"),
+    production: getConfig("production")
+};
