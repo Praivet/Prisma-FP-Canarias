@@ -16,9 +16,9 @@ async function startServer() {
 
     //await sequelize.sync();
 
-    await sequelize.sync({ force: true });
-
-    console.log("Modelos sincronizados.");
+    // Las tablas las crean las migraciones (npm run db:migrate). Con sync({ force: true })
+    // se borrarían las tablas y los datos de los seeders cada vez que arranca el servidor.
+    // await sequelize.sync({ force: true });
 
     app.listen(env.PORT, () => {
       console.log(

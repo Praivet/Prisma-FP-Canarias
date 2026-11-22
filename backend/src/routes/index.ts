@@ -9,6 +9,7 @@ import surveyRoutes from "../modules/survey/survey.routes.js";
 import surveyQuestionRoutes from "../modules/survey-question/survey-question.routes.js";
 import surveyInvitationRoutes from "../modules/survey-invitation/survey-invitation.routes.js";
 import surveyAnswerRoutes from "../modules/survey-answer/survey-answer.routes.js";
+import examenAuditRoutes from "../modules/examen-audit/examen-audit.routes.js";
 
   
 import academicYearRoutes from "../modules/academic-year/academic-year.routes.js";
@@ -52,6 +53,7 @@ router.use("/surveys", surveyRoutes);
 router.use("/survey-questions", surveyQuestionRoutes);
 router.use("/survey-invitations", surveyInvitationRoutes);
 router.use("/survey-answers", surveyAnswerRoutes);
+router.use("/examen-audits", examenAuditRoutes);
 
 
 

@@ -8,6 +8,7 @@ import { Survey } from "../modules/survey/survey.model.js";
 import { SurveyQuestion } from "../modules/survey-question/survey-question.model.js";
 import { SurveyInvitation } from "../modules/survey-invitation/survey-invitation.model.js";
 import { SurveyAnswer } from "../modules/survey-answer/survey-answer.model.js";
+import { ExamenAudit } from "../modules/examen-audit/examen-audit.model.js";
 
 import { AcademicYear } from "../modules/academic-year/academic-year.model.js";
 import { Skill } from "../modules/skill/skill.model.js";
@@ -46,6 +47,10 @@ export function defineAssociations() {
   // FK opcional (internshipId can be null): with SET NULL, if you delete the internship, the employment record is kept and its internshipId becomes NULL.
   Internship.hasMany(EmploymentRecord, { foreignKey: "internshipId", as: "employmentRecords", onDelete: "SET NULL" }); //0..1:N
   EmploymentRecord.belongsTo(Internship, { foreignKey: "internshipId", as: "internship" }); //N:0..1
+
+  // EXAMEN: una Company tiene 0..N ExamenAudit y cada ExamenAudit pertenece a 1 Company
+  Company.hasMany(ExamenAudit, { foreignKey: "companyId", as: "examenAudits", onDelete: "CASCADE" }); //1:N
+  ExamenAudit.belongsTo(Company, { foreignKey: "companyId", as: "company" }); //N:1
 
   // CONSENT
 
