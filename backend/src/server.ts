@@ -12,9 +12,7 @@ async function startServer() {
 
 
 
-    console.log("Conexión con MySQL establecida.");
-
-    //await sequelize.sync();
+    console.log("Conexión con PostgreSQL establecida.");
 
     // Las tablas las crean las migraciones (npm run db:migrate). Con sync({ force: true })
     // se borrarían las tablas y los datos de los seeders cada vez que arranca el servidor.

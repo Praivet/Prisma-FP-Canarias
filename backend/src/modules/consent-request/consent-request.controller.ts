@@ -58,13 +58,12 @@ export class ConsentRequestController {
                 });
                 return;
             }
-            // TODO: descomentar cuando exista el modelo User
-            // if (!(await ConsentRequestService.userExists(Number(sentById)))) {
-            //     res.status(400).json({
-            //         message: "User not found",
-            //     });
-            //     return;
-            // }
+            if (!(await ConsentRequestService.userExists(Number(sentById)))) {
+                res.status(400).json({
+                    message: "User not found",
+                });
+                return;
+            }
             const consentRequest = await ConsentRequestService.create({
                 studentId: Number(studentId),
                 sentById: Number(sentById),
@@ -110,16 +109,15 @@ export class ConsentRequestController {
                 });
                 return;
             }
-            // TODO: descomentar cuando exista el modelo User
-            // if (
-            //     sentById !== undefined &&
-            //     !(await ConsentRequestService.userExists(Number(sentById)))
-            // ) {
-            //     res.status(400).json({
-            //         message: "User not found",
-            //     });
-            //     return;
-            // }
+            if (
+                sentById !== undefined &&
+                !(await ConsentRequestService.userExists(Number(sentById)))
+            ) {
+                res.status(400).json({
+                    message: "User not found",
+                });
+                return;
+            }
             const updatedConsentRequest = await ConsentRequestService.update(consentRequest, {
                 ...(studentId !== undefined && { studentId: Number(studentId) }),
                 ...(sentById !== undefined && { sentById: Number(sentById) }),

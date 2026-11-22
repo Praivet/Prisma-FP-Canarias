@@ -18,6 +18,27 @@ export class TrainingProgramController {
   }
 
 
+  // CONSULTA Q1: GET /api/training-programs/eagerly/family-center
+  static async getAllWithFamilyAndCenter(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await TrainingProgramService.findAllWithFamilyAndCenter());
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q2: GET /api/training-programs/eagerly/family/:familyCode -> p. ej. /eagerly/family/IFC
+  // Texto que llega por la URL: String(req.params.X). Sin Number() porque no es un id.
+  static async getAllByFamilyCode(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await TrainingProgramService.findAllByFamilyCode(String(req.params.familyCode)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
   // Route params arrive as strings: convert with Number(). 404 if nothing was found.
   static async getById(
     req: Request,

@@ -5,7 +5,12 @@ const router = Router();
 
 router.get("/", TrainingProgramController.getAll);
 
-// Eager endpoint: GET /:id/eagerly returns the entity with its associations.
+// OJO: las rutas con texto fijo ("eagerly") van ANTES de "/:id". Si no, Express cree que "eagerly" es un id.
+router.get("/eagerly/family-center", TrainingProgramController.getAllWithFamilyAndCenter);
+
+// :familyCode en la ruta  <->  req.params.familyCode en el controller (mismo nombre).
+router.get("/eagerly/family/:familyCode", TrainingProgramController.getAllByFamilyCode);
+
 router.get("/:id/eagerly", TrainingProgramController.getEagerlyById);
 
 router.get("/:id", TrainingProgramController.getById);

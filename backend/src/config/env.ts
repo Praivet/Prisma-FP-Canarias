@@ -12,6 +12,8 @@ if(!["development", "test", "production"].includes(NODE_ENV)){
 if(NODE_ENV !== "production"){
   dotenv.config({
     path: `.env.${NODE_ENV}`,
+    // override: los valores de .env.<entorno> ganan a los de .env si se repiten.
+    override: true,
   })
 }
 

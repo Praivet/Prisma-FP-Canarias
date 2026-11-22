@@ -8,6 +8,8 @@ router.get("/", TutorAssignmentController.getAll);
 // Specific routes go before "/:id" so Express does not take "eagerly" as an id.
 router.get("/eagerly", TutorAssignmentController.getAllEagerly);
 
+router.get("/eagerly/tutor-email/:email", TutorAssignmentController.getAllByTutorEmail);
+
 router.get("/tutor/:tutorId", TutorAssignmentController.getByTutorId);
 
 router.get("/:id", TutorAssignmentController.getById);

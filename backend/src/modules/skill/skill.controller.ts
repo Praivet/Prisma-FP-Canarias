@@ -71,6 +71,27 @@ export class SkillController {
   }
 
 
+  // CONSULTA Q7: GET /api/skills/eagerly/status/:status/program/:programCode -> p. ej. /eagerly/status/enrolled/program/IFC-DAW
+  // Dos parámetros: cada ":nombre" de la ruta llega en req.params.nombre.
+  static async getAllByEnrollmentStatusAndProgramCode(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await SkillService.findAllByEnrollmentStatusAndProgramCode(String(req.params.status), String(req.params.programCode)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q15: GET /api/skills/category/:category -> p. ej. /category/Programming
+  static async getAllByCategory(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await SkillService.findAllByCategory(String(req.params.category)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
   // Validate the required fields (400) before calling the service. 201 = created.
   static async create(
     req: Request,
