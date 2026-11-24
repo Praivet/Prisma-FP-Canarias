@@ -27,13 +27,13 @@ export const companyService = {
     create(payload: CompanyPayload) {
         return apiFetch<Company>('/companies', {
             method: 'POST',
-            body: JSON.stringify(payload),
+            body: toFormData(payload),
         })
     },
     update(id: number, payload: CompanyPayload) {
         return apiFetch<Company>(`/companies/${id}`, {
             method: 'PUT',
-            body: JSON.stringify(payload),
+            body: toFormData(payload),
         })
     },
     remove(id: number) {
