@@ -1,5 +1,9 @@
 const API_URL = import.meta.env.VITE_API_URL
 
+export function companyImageUrl(filename: string): string {
+    return `${API_URL.replace(/\/api\/?$/, "")}/images/${encodeURIComponent(filename)}`
+}
+
 export async function apiFetch<T>(
     endpoint: string,
     options: RequestInit = {}

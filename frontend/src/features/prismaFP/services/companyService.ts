@@ -5,6 +5,18 @@ import type {
     CompanyPayload,
 } from '../types/company'
 
+function toFormData(payload: CompanyPayload){
+    const form = new FormData()
+    form.set('taxId', payload.taxId)
+    form.set('name', payload.name)
+    form.set('sector', payload.sector ?? '')
+    form.set('city', payload.city ?? '')
+    form.set('contactEmail', payload.contactEmail ?? '')
+    form.set('contactPhone', payload.contactPhone ?? '')
+    if (payload.image) form.set('image', payload.image)
+    return form
+}
+
 export const companyService = {
     getAll() {
         return apiFetch<Company[]>('/companies')
