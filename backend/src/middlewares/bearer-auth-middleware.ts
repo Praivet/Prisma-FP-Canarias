@@ -1,53 +1,63 @@
-import { Request, Response, NextFunction } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import type { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { env } from "../config/env.js";
 import { User } from "../modules/user/user.model.js";
+import { JWT_AUDIENCE, JWT_ISSUER } from "../modules/auth/auth.service.js";
 
-export async function bearerAuth(req: Request, res: Response, next: NextFunction): Promise<void> {
+// Bearer Auth: the client sends  Authorization: Bearer <JWT obtained in /api/auth/login>
+// If the token is valid and its user still exists, the request goes on to the controller.
+export async function bearerAuth(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  const authorization = req.headers.authorization;
+  if (!authorization || !authorization.startsWith("Bearer ")) {
+    res.setHeader("WWW-Authenticate", 'Bearer realm="Prisma FP API"');
+    res.status(401).json({ message: "Se requiere un token Bearer" });
+    return;
+  }
 
-    const authorization = req.headers.authorization;
-    if (!authorization || authorization.indexOf("Bearer ") != 0) {
-        res.status(401).json({ message: "Token Bearer required" });
-        return;
+  const token = authorization.slice("Bearer ".length).trim();
+
+  if (!env.JWT_SECRET) {
+    next(new Error("JWT_SECRET no está configurado"));
+    return;
+  }
+
+  try {
+    // verify() checks the signature with our secret, the expiry (exp), the issuer and the audience.
+    const payload = jwt.verify(token, env.JWT_SECRET, {
+      algorithms: ["HS256"],
+      issuer: JWT_ISSUER,
+      audience: JWT_AUDIENCE,
+    });
+
+    if (typeof payload === "string" || !payload.sub) {
+      res.status(401).json({ message: "Token no válido" });
+      return;
     }
 
-    const token = authorization.split(" ")[1];
-    const secret = process.env.JWT_SECRET;
-    if (!secret) {
-        next(new Error("JWT_SECRET not configured"));
-        return;
+    const user = await User.findByPk(Number(payload.sub));
+    if (!user || !user.isActive) {
+      res.status(401).json({ message: "Usuario no encontrado o inactivo" });
+      return;
     }
 
-    try {
-        const decoded = jwt.verify(token, secret, {
-            algorithms: ["HS256"],
-            issuer: "bicycle-shop-api",
-            audience: "bicycle-shop-client"
-        }
-        );
+    // Who is calling, for the controllers (and for role checks later on).
+    res.locals.user = {
+      id: user.id,
+      email: user.email,
+      roles: Array.isArray(payload.roles) ? payload.roles : [],
+    };
 
-        if (typeof decoded === "string" || !decoded.sub) {
-            res.status(401).json({ message: "Token not valid" });
-            return;
-        }
-
-        const payload = decoded as JwtPayload;
-        const user = await User.findByPk(payload.sub);
-        if (!user) {
-            res.status(401).json({ message: "User not found" });
-            return;
-        }
-
-        // anything inside locals allows to share info between controllers and middlewares
-        res.locals.authUser = {
-            user
-        };
-
-        next();
-    } catch (error) {
-        if (error instanceof jwt.JsonWebTokenError || error instanceof jwt.TokenExpiredError) {
-            res.status(401).json({ message: "Invalid or expired token" });
-            return;
-        }
-        next(error);
+    next();
+  } catch (error) {
+    // TokenExpiredError extends JsonWebTokenError, so this catches both.
+    if (error instanceof jwt.JsonWebTokenError) {
+      res.status(401).json({ message: "Token no válido o caducado" });
+      return;
     }
-}
+    next(error);
+  }
+}
