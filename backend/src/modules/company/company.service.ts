@@ -20,6 +20,7 @@ export class CompanyService {
         city?: string | null;
         contactEmail?: string | null;
         contactPhone?: string | null;
+        filename?: string | null;
     }) {
         const company = await Company.create(data);
         return CompanyService.findById(company.id);
@@ -33,6 +34,7 @@ export class CompanyService {
             city?: string | null;
             contactEmail?: string | null;
             contactPhone?: string | null;
+            filename?: string | null;
         }
     ) {
         await company.update(data);

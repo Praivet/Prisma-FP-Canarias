@@ -213,6 +213,98 @@ To use it: in Bruno, *Import Collection* → select the JSON file, and run the r
 
 Work is organised with Scrum and GitHub Projects. Each task is done in its own branch and merged into `develop` through a pull request.
 
+## RBAC Permissions Matrix
+
+Roles as defined in `database/seeders/…-seed-role.js`: `ADMIN` (Administrador), `COORDINATOR` (Directivo), `TEACHER` (Tutor) and `STUDENT` (Alumno). The Alumno Colaborador role only takes part in HU-08/HU-09, which are out of scope.
+
+### Épica 3 (Juan Pablo)
+
+HU-05: Employment history.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `employment-record:read` | ✅ | ✅¹ | ✅² | ❌ |
+| `employment-record:create` | ✅ | ❌ | ✅² | ❌ |
+| `employment-record:update` | ✅ | ❌ | ✅² | ❌ |
+| `employment-record:delete` | ✅ | ❌ | ❌ | ❌ |
+
+¹ Not stated in HU-05; deduced because the Directivo needs this data for the KPIs in HU-12.
+
+² Only for students in the teacher's assigned programmes (HU-04: the student record includes the "Historial laboral" tab).
+
+### Épica 4 (Juan Pablo)
+
+HU-06: GDPR consent management. HU-07: Consent request by email.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `consent:read` | ✅ | ❌ | ✅¹ | ✅² |
+| `consent:create` | ❌³ | ❌ | ❌ | ✅² |
+| `consent:update` | ❌³ | ❌ | ❌ | ✅² |
+| `consent:delete` | ❌⁴ | ❌ | ❌ | ❌ |
+| `consent-request:read` | ✅ | ❌ | ✅¹ | ❌ |
+| `consent-request:create` | ✅ | ❌ | ❌ | ❌ |
+| `consent-request:update` | ✅ | ❌ | ❌ | ❌ |
+| `consent-request:delete` | ✅ | ❌ | ❌ | ❌ |
+
+¹ Only for students in the teacher's assigned programmes (HU-04: the student record includes the "Consentimiento" tab).
+
+² Only their own consent (grant = create, revoke = update).
+
+³ Consent must be given or revoked by the student; nobody can do it on their behalf.
+
+⁴ Consent changes are an immutable log (HU-06), so they are never deleted.
+
+### Épica 6 (Juan Pablo)
+
+HU-10: Internship companies and hiring.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `company:read` | ✅ | ✅ | ✅ | ❌ |
+| `company:create` | ✅ | ✅³ | ✅ | ❌ |
+| `company:update` | ✅ | ✅³ | ✅ | ❌ |
+| `company:delete` | ✅ | ✅³ | ❌ | ❌ |
+| `internship:read` | ✅ | ✅¹ | ✅² | ❌ |
+| `internship:create` | ✅ | ❌ | ✅² | ❌ |
+| `internship:update` | ✅ | ❌ | ✅² | ❌ |
+| `internship:delete` | ✅ | ❌ | ❌ | ❌ |
+
+¹ Not stated in HU-10; deduced because the Directivo needs the "% hired by their internship company" KPI.
+
+² Only for students in the teacher's assigned programmes.
+
+³ Not stated in HU-10; taken from the current role seeder (`company:write` for COORDINATOR).
+
+### Épica 7 (Juan Pablo)
+
+HU-11: Graduate survey.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `survey:read` | ✅ | ✅ | ❌ | ✅¹ |
+| `survey:create` | ✅ | ✅ | ❌ | ❌ |
+| `survey:update` | ✅ | ✅ | ❌ | ❌ |
+| `survey:delete` | ✅ | ✅ | ❌ | ❌ |
+| `survey-question:read` | ✅ | ✅ | ❌ | ✅¹ |
+| `survey-question:create` | ✅ | ✅ | ❌ | ❌ |
+| `survey-question:update` | ✅ | ✅ | ❌ | ❌ |
+| `survey-question:delete` | ✅ | ✅ | ❌ | ❌ |
+| `survey-invitation:read` | ✅ | ✅ | ❌ | ❌ |
+| `survey-invitation:create` | ✅ | ✅ | ❌ | ❌ |
+| `survey-invitation:update` | ✅ | ✅ | ❌ | ❌ |
+| `survey-invitation:delete` | ✅ | ✅ | ❌ | ❌ |
+| `survey-answer:read` | ✅ | ✅ | ❌ | ✅² |
+| `survey-answer:create` | ❌³ | ❌³ | ❌ | ✅² |
+| `survey-answer:update` | ❌³ | ❌³ | ❌ | ❌ |
+| `survey-answer:delete` | ✅ | ❌ | ❌ | ❌ |
+
+¹ Only the survey they were invited to, through their unique link.
+
+² Only their own answers.
+
+³ Answers must come from the graduate; staff cannot create or change them.
+
 ## Current status
 
 Done:

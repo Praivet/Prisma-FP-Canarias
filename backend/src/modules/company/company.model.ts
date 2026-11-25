@@ -18,6 +18,7 @@ export class Company extends Model<
     declare city: CreationOptional<string | null>;
     declare contactEmail: CreationOptional<string | null>;
     declare contactPhone: CreationOptional<string | null>;
+    declare filename: CreationOptional<string | null>;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
@@ -52,6 +53,10 @@ Company.init(
         },
         contactPhone: {
             type: DataTypes.STRING(20),
+            allowNull: true,
+        },
+        filename: {
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         createdAt: DataTypes.DATE,
