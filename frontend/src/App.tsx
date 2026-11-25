@@ -1,4 +1,4 @@
-import StudentsPage from './features/prismaFP/pages/StudentsPage'
+import StudentsPage from './features/students/pages/StudentsPage'
 
 function App() {
     return <StudentsPage />

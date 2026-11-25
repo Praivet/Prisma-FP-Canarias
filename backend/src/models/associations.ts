@@ -15,10 +15,17 @@ import { Student } from "../modules/student/student.model.js";
 import { StudentEnrollment } from "../modules/student-enrollment/student-enrollment.model.js";
 import { StudentInterest } from "../modules/student-interest/student-interest.model.js";
 import { StudentSkill } from "../modules/student-skill/student-skill.model.js";
+<<<<<<< HEAD
 import { TrainingProgram } from "../modules/training-program/training-program.model.js";
 import { TutorAssignment } from "../modules/tutor-assignament/tutor-assignament.model.js";
 import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
 import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
+=======
+import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
+import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
+import { TrainingProgram } from "../modules/training-program/training-program.model.js";
+import { TutorAssignment } from "../modules/tutor-assignament/tutor-assignament.model.js";
+>>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
 
 import { User } from "../modules/auth/user.model.js";
 import { Role } from "../modules/rbac/role.model.js";
@@ -80,6 +87,26 @@ export function defineAssociations() {
   // 1:N AcademicYear -> StudentEnrollment
   AcademicYear.hasMany(StudentEnrollment, { foreignKey: "academicYearId", as: "enrollments" });
   StudentEnrollment.belongsTo(AcademicYear, { foreignKey: "academicYearId", as: "academicYear" });
+
+  // TRAINING OFFER (sin estas importaciones los 4 modelos no se registraban en sequelize y faltaban en la migración)
+
+  ProfessionalFamily.hasMany(TrainingProgram, { foreignKey: "familyId", as: "trainingPrograms", onDelete: "RESTRICT" }); //1:N
+  TrainingProgram.belongsTo(ProfessionalFamily, { foreignKey: "familyId", as: "family" }); //N:1
+
+  EducationalCenter.hasMany(TrainingProgram, { foreignKey: "centerId", as: "trainingPrograms", onDelete: "RESTRICT" }); //1:N
+  TrainingProgram.belongsTo(EducationalCenter, { foreignKey: "centerId", as: "center" }); //N:1
+
+  TrainingProgram.hasMany(StudentEnrollment, { foreignKey: "programId", as: "enrollments", onDelete: "RESTRICT" }); //1:N
+  StudentEnrollment.belongsTo(TrainingProgram, { foreignKey: "programId", as: "trainingProgram" }); //N:1
+
+  TrainingProgram.hasMany(TutorAssignment, { foreignKey: "programId", as: "tutorAssignments", onDelete: "CASCADE" }); //1:N
+  TutorAssignment.belongsTo(TrainingProgram, { foreignKey: "programId", as: "trainingProgram" }); //N:1
+
+  AcademicYear.hasMany(TutorAssignment, { foreignKey: "academicYearId", as: "tutorAssignments" }); //1:N
+  TutorAssignment.belongsTo(AcademicYear, { foreignKey: "academicYearId", as: "academicYear" }); //N:1
+
+  User.hasMany(TutorAssignment, { foreignKey: "tutorId", as: "tutorAssignments", onDelete: "CASCADE" }); //1:N
+  TutorAssignment.belongsTo(User, { foreignKey: "tutorId", as: "tutor" }); //N:1
 
   // 1:N Student -> StudentInterest
   Student.hasMany(StudentInterest, { foreignKey: "studentId", as: "interests", onDelete: "CASCADE" });

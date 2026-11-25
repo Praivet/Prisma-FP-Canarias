@@ -1,6 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
 import { ForeignKeyConstraintError } from "sequelize";
 import { CompanyService } from "./company.service.js";
+import { unlink } from "fs/promises";
+import { removeImage } from "../../middlewares/upload.middleware.js";
+
 
 export class CompanyController {
     static async getAll(
@@ -39,6 +42,7 @@ export class CompanyController {
         res: Response,
         next: NextFunction
     ) {
+        let created = false;
         try {
             const { taxId, name, sector, city, contactEmail, contactPhone } = req.body;
             if (taxId === undefined || name === undefined) {
@@ -60,17 +64,24 @@ export class CompanyController {
                 city,
                 contactEmail,
                 contactPhone,
+                filename: req.file ?.filename ?? null,
             });
+            created = true;
             res.status(201).json(company);
         } catch (error) {
             next(error);
-        }
+        } finally {
+            if (!created && req.file) {
+               await unlink(req.file.path).catch((error) => console.error("Error deleting file:", error));
+            }
     }
+}
     static async update(
         req: Request,
         res: Response,
         next: NextFunction
     ) {
+        let updated = false;
         try {
             const id = Number(req.params.id);
             const company = await CompanyService.findById(id);
@@ -89,17 +100,31 @@ export class CompanyController {
                     return;
                 }
             }
+<<<<<<< HEAD
             const updatedCompany = await CompanyService.update(company, {
+=======
+            //... is an operator from js and ts, any questions -> ask me (jp)
+            const data: Parameters<typeof CompanyService.update>[1] = {
+>>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
                 ...(taxId !== undefined && { taxId }),
                 ...(name !== undefined && { name }),
                 ...(sector !== undefined && { sector }),
                 ...(city !== undefined && { city }),
                 ...(contactEmail !== undefined && { contactEmail }),
                 ...(contactPhone !== undefined && { contactPhone }),
-            });
+            };
+            // Keep the old logo name so it can be removed once the new one is saved
+            const previousFilename = company.filename;
+            if (req.file) data.filename = req.file.filename;
+            const updatedCompany = await CompanyService.update(company, data);
+            updated = true;
+            if (req.file) await removeImage(previousFilename);
             res.json(updatedCompany);
         } catch (error) {
             next(error);
+        } finally {
+            // If the update failed, remove the new image so it does not stay orphaned
+            if (!updated && req.file) await removeImage(req.file.filename);
         }
     }
     static async delete(
