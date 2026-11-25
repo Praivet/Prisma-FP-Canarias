@@ -1,4 +1,4 @@
-import { Role } from "./role.model.js";
+import { Role } from "../rbac/role.model.js";
 
 export class RoleService {
     static async findAll() {

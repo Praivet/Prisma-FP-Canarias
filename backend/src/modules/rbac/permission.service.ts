@@ -1,4 +1,4 @@
-import { Permission } from "./permission.model.js";
+import { Permission } from "../rbac/permission.model.js";
 export class PermissionService {
     static async findAll() {
         return Permission.findAll({

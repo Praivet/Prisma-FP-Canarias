@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { UserRoleService } from "./user-role.service.js";
+import { UserRoleService } from "../user-role/user-role.service.js";
 
 export class UserRoleController {
   static async getAll(

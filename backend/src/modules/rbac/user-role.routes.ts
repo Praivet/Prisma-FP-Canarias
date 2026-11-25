@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { UserRoleController } from './user-role.controller.js';
+import { UserRoleController } from '../rbac/user-role.controller.js';
 
 const router = Router();
 

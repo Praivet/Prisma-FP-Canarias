@@ -1,4 +1,4 @@
-import { User } from "./user.model.js";
+import { User } from "../auth/user.model.js";
 export class UserService {
     static async findAll() {
         return User.findAll({

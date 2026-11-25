@@ -20,11 +20,11 @@ import studentSkillRoutes from "../modules/student-skill/student-skill.routes.js
 import trainingProgramRoutes from "../modules/training-program/training-program.routes.js";
 import tutorAssignmentRoutes from "../modules/tutor-assignament/tutor-assignament.routes.js";
 
-import userRoutes from "../../src/modules/user/user.routes.js";
-import roleRoutes from "../../src/modules/role/role.routes.js";
+import userRoutes from "../modules/auth/user.routes.js";
+import roleRoutes from "../modules/rbac/role.routes.js";
 import permissionRoutes from "../../src/modules/permission/permission.routes.js";
 import userRoleRoutes from "../../src/modules/user-role/user-role.routes.js";
-import rolePermissionRoutes from "../../src/modules/role-permission/role-permission.routes.js";
+import rolePermissionRoutes from "../modules/rbac/role-permission.routes.js";
 import authTokenRoutes from "../../src/modules/auth-token/auth-token.routes.js";
 import auditLogRoutes from "../../src/modules/audit-log/audit-log.routes.js";
 import educationalCenterRoutes from "../../src/modules/educational-center/educational-center.routes.js";

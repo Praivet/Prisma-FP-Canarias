@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 import { Student } from "./student.model.js";
-import { User } from "../user/user.model.js";
+import { User } from "../auth/user.model.js";
 import { TrainingProgram } from "../training-program/training-program.model.js";
 import { Skill } from "../skill/skill.model.js";
 import { StudentInterest } from "../student-interest/student-interest.model.js";

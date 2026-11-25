@@ -20,10 +20,10 @@ import { TutorAssignment } from "../modules/tutor-assignament/tutor-assignament.
 import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
 import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
 
-import { User } from "../modules/user/user.model.js";
-import { Role } from "../modules/role/role.model.js";
-import { Permission } from "../modules/permission/permission.model.js";
-import { UserRole } from "../modules/user-role/user-role.model.js";
+import { User } from "../modules/auth/user.model.js";
+import { Role } from "../modules/rbac/role.model.js";
+import { Permission } from "../modules/rbac/permission.model.js";
+import { UserRole } from "../modules/rbac/user-role.model.js";
 import { RolePermission } from "../modules/role-permission/role-permission.model.js";
 import { AuthToken } from "../modules/auth-token/auth-token.model.js";
 import { AuditLog } from "../modules/audit-log/audit-log.model.js";

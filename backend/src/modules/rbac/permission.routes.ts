@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PermissionController } from './permission.controller.js';
+import { PermissionController } from '../rbac/permission.controller.js';
 
 const router = Router();
 
