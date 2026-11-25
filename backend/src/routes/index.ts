@@ -44,6 +44,7 @@ router.use("/students", studentRoutes);
 router.use("/student-enrollments", studentEnrollmentRoutes);
 router.use("/student-interests", studentInterestRoutes);
 router.use("/student-skills", studentSkillRoutes);
+// OJO: cada módulo nuevo necesita su import arriba y su router.use aquí. Si falta, Bruno da 404.
 router.use("/training-programs", trainingProgramRoutes);
 router.use("/tutor-assignments", tutorAssignmentRoutes);
 

@@ -1,5 +1,7 @@
 import { Skill } from "./skill.model.js";
 import { Student } from "../student/student.model.js";
+import { StudentEnrollment } from "../student-enrollment/student-enrollment.model.js";
+import { TrainingProgram } from "../training-program/training-program.model.js";
 
 export class SkillService {
 
@@ -20,6 +22,47 @@ export class SkillService {
       include: [
         { model: Student, as: "students" },
       ],
+    });
+  }
+
+
+  // CONSULTA Q7: skills de los alumnos que tienen una matrícula con un estado dado en un ciclo dado.
+  // Son tres saltos: Skill -> students (N:M) -> enrollments (1:N) -> trainingProgram (belongsTo).
+  // Cada where va en el include de la tabla donde está ese campo. Los where hacen INNER JOIN.
+  // required: true en students para que no salgan skills que nadie tiene.
+  // through: { attributes: [] } = no traigas las columnas de la tabla intermedia student_skills.
+  static async findAllByEnrollmentStatusAndProgramCode(status: string, programCode: string) {
+    return Skill.findAll({
+      include: [
+        {
+          model: Student,
+          as: "students",
+          required: true,
+          attributes: ["id", "firstName", "lastName"],
+          through: { attributes: [] },
+          include: [
+            {
+              model: StudentEnrollment,
+              as: "enrollments",
+              where: { status },
+              attributes: ["id", "status"],
+              include: [
+                { model: TrainingProgram, as: "trainingProgram", where: { code: programCode }, attributes: ["code"] },
+              ],
+            },
+          ],
+        },
+      ],
+      order: [["id", "ASC"]],
+    });
+  }
+
+
+  // CONSULTA Q15: where simple por una columna de la propia tabla, ordenado por nombre.
+  static async findAllByCategory(category: string) {
+    return Skill.findAll({
+      where: { category },
+      order: [["name", "ASC"]],
     });
   }
 

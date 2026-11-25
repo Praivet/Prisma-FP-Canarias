@@ -9,6 +9,8 @@ router.use(bearerAuth);
 
 router.get("/", StudentInterestController.getAll);
 
+router.get("/search/:text", StudentInterestController.getAllByNameContaining);
+
 // Specific routes go before "/:id".
 router.get("/student/:studentId", StudentInterestController.getByStudentId);
 

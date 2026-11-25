@@ -52,6 +52,78 @@ export class StudentEnrollmentController {
   }
 
 
+  // GET /api/student-enrollments/eagerly/academic-year/:academicYearName -> p. ej. /eagerly/academic-year/2025-2026
+  static async getAllEagerlyByAcademicYearName(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const academicYearName = String(req.params.academicYearName);
+
+      const studentEnrollments = await StudentEnrollmentService.findAllEagerlyByAcademicYearName(academicYearName);
+
+      res.json(studentEnrollments);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q5: GET /api/student-enrollments/eagerly/student-program
+  static async getAllWithStudentAndProgram(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await StudentEnrollmentService.findAllWithStudentAndProgram());
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q10: GET /api/student-enrollments/status/:status -> p. ej. /status/enrolled
+  static async getAllByStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await StudentEnrollmentService.findAllByStatus(String(req.params.status)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q11: GET /api/student-enrollments/between/:from/:to -> p. ej. /between/2025-01-01/2025-12-31
+  // Dos parámetros en la URL: cada ":nombre" de la ruta llega en req.params.nombre.
+  static async getAllBetween(req: Request, res: Response, next: NextFunction) {
+    try {
+      const from = String(req.params.from);
+      const to = String(req.params.to);
+
+      res.json(await StudentEnrollmentService.findAllBetween(from, to));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q12: GET /api/student-enrollments/with-notes -> sin parámetros.
+  static async getAllWithNotes(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await StudentEnrollmentService.findAllWithNotes());
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  // CONSULTA Q6: GET /api/student-enrollments/before/:date -> p. ej. /before/2025-09-10
+  static async getAllBefore(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.json(await StudentEnrollmentService.findAllBefore(String(req.params.date)));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
   // Route params arrive as strings: convert with Number(). 404 if nothing was found.
   static async getById(
     req: Request,

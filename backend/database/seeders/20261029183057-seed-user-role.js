@@ -32,12 +32,12 @@ module.exports = {
     const roleId = Object.fromEntries(roles.map((r) => [r.name, r.id]));
 
     await queryInterface.bulkInsert('user_roles', [
-      { user_id: userId['admin@prismafp.test'], role_id: roleId.ADMIN, assigned_at: now },
-      { user_id: userId['coordinator@prismafp.test'], role_id: roleId.COORDINATOR, assigned_at: now },
-      { user_id: userId['coordinator@prismafp.test'], role_id: roleId.TEACHER, assigned_at: now },
-      { user_id: userId['teacher@prismafp.test'], role_id: roleId.TEACHER, assigned_at: now },
-      { user_id: userId['student@prismafp.test'], role_id: roleId.STUDENT, assigned_at: now },
-      { user_id: userId['locked@prismafp.test'], role_id: roleId.STUDENT, assigned_at: now },
+      { user_id: 1, role_id: 1, assigned_at: now },
+      { user_id: 2, role_id: 2, assigned_at: now },
+      { user_id: 2, role_id: 3, assigned_at: now },
+      { user_id: 3, role_id: 3, assigned_at: now },
+      { user_id: 4, role_id: 4, assigned_at: now },
+      { user_id: 5, role_id: 4, assigned_at: now },
     ], {});
   },
 

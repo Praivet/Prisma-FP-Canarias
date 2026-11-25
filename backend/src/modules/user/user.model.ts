@@ -6,6 +6,7 @@ import {
   Model,
 } from 'sequelize';
 import { sequelize } from '../../config/database.js';
+import { Role } from '../role/role.model.js';
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
@@ -18,6 +19,8 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare lockedUntil: CreationOptional<Date | null>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+
+    declare roles?: Role[];
 }
 
 User.init(
@@ -38,4 +41,4 @@ User.init(
     tableName: 'users',
     timestamps: true,
   },
-);
+);
