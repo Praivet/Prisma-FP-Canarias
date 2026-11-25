@@ -20,11 +20,11 @@ import { ProfessionalFamily } from "../modules/professional-family/professional-
 import { TrainingProgram } from "../modules/training-program/training-program.model.js";
 import { TutorAssignment } from "../modules/tutor-assignament/tutor-assignament.model.js";
 
-import { User } from "../modules/auth/user.model.js";
-import { Role } from "../modules/rbac/role.model.js";
-import { Permission } from "../modules/rbac/permission.model.js";
-import { UserRole } from "../modules/rbac/user-role.model.js";
-import { RolePermission } from "../modules/rbac/role-permission.model.js";
+import { User } from "../modules/user/user.model.js";
+import { Role } from "../modules/role/role.model.js";
+import { Permission } from "../modules/permission/permission.model.js";
+import { UserRole } from "../modules/user-role/user-role.model.js";
+import { RolePermission } from "../modules/role-permission/role-permission.model.js";
 import { AuthToken } from "../modules/auth-token/auth-token.model.js";
 import { AuditLog } from "../modules/audit-log/audit-log.model.js";
 
@@ -120,30 +120,6 @@ export function defineAssociations() {
   // belongsTo en el lado que tiene la FK. userId es unique en Student: por eso es 1:1 y no 1:N.
   User.hasOne(Student, { foreignKey: "userId", as: "student", onDelete: "CASCADE" });
   Student.belongsTo(User, { foreignKey: "userId", as: "user" });
-
-  // 1:N TrainingProgram -> StudentEnrollment (FK programId en StudentEnrollment).
-  TrainingProgram.hasMany(StudentEnrollment, { foreignKey: "programId", as: "enrollments" });
-  StudentEnrollment.belongsTo(TrainingProgram, { foreignKey: "programId", as: "trainingProgram" });
-
-  // TutorAssignment no es tabla intermedia: es una entidad con tres FKs, cada una de un 1:N.
-  // 1:N TrainingProgram -> TutorAssignment
-  TrainingProgram.hasMany(TutorAssignment, { foreignKey: "programId", as: "tutorAssignments" });
-  TutorAssignment.belongsTo(TrainingProgram, { foreignKey: "programId", as: "trainingProgram" });
-
-  // 1:N AcademicYear -> TutorAssignment
-  AcademicYear.hasMany(TutorAssignment, { foreignKey: "academicYearId", as: "tutorAssignments" });
-  TutorAssignment.belongsTo(AcademicYear, { foreignKey: "academicYearId", as: "academicYear" });
-
-  // 1:N User -> TutorAssignment (el tutor es un usuario; la FK se llama tutorId, no userId).
-  User.hasMany(TutorAssignment, { foreignKey: "tutorId", as: "tutorAssignments" });
-  TutorAssignment.belongsTo(User, { foreignKey: "tutorId", as: "tutor" });
-
-  // 1:N ProfessionalFamily -> TrainingProgram y EducationalCenter -> TrainingProgram.
-  ProfessionalFamily.hasMany(TrainingProgram, { foreignKey: "familyId", as: "trainingPrograms" });
-  TrainingProgram.belongsTo(ProfessionalFamily, { foreignKey: "familyId", as: "family" });
-
-  EducationalCenter.hasMany(TrainingProgram, { foreignKey: "centerId", as: "trainingPrograms" });
-  TrainingProgram.belongsTo(EducationalCenter, { foreignKey: "centerId", as: "center" });
 
   // REGLA DE ORO: el modelo que TIENE la FK hace belongsTo; el otro hace hasMany (1:N) o hasOne (1:1).
   // Las dos líneas llevan el mismo foreignKey. Alias: plural en hasMany, singular en belongsTo.

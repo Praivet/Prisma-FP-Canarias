@@ -1,10 +1,10 @@
 import bcrypt from "bcryptjs";
-import { User } from "./user.model.js";
+import { User } from "../user/user.model.js";
 import jwt from "jsonwebtoken";
 import { env } from "../../config/env.js";
 import { sequelize } from "../../config/database.js";
-import { Role } from "../rbac/role.model.js";
-import { UserRole } from "../rbac/user-role.model.js";
+import { Role } from "../role/role.model.js";
+import { UserRole } from "../user-role/user-role.model.js";
 
 export class AuthService {
 
@@ -35,7 +35,9 @@ export class AuthService {
 
   static async register(
     email: string,
-    password: string
+    password: string,
+    firstName: string,
+    lastName: string
   ): Promise<User> {
     return sequelize.transaction(async (transaction) => {
       const existingUser = await User.findOne({ where: { email }, transaction });
@@ -45,13 +47,13 @@ export class AuthService {
       const passwordHash = await bcrypt.hash(password, 12);
 
       const customerRole = await Role.findOne({
-        where: { name: "CUSTOMER" }, //revisar rol por defecto al crear user
+        where: { name: "STUDENT" },
         transaction
       });
 
-      if (!customerRole) throw new Error("CUSTOMER role not found");
+      if (!customerRole) throw new Error("STUDENT role not found");
 
-      const user = await User.create({ email, passwordHash }, { transaction });
+      const user = await User.create({ email, passwordHash, firstName, lastName }, { transaction });
 
       await UserRole.create({ userId: user.id, roleId: customerRole.id }, { transaction });
 

@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { EducationalCenterController } from './educational-center.controller.js';
-import { bearerAuth } from '../../middlewares/bearer-auth.middleware.js';
+import { bearerAuth } from '../../middlewares/bearer-auth-middleware.js';
 
 const router = Router();
 
+// Every route of this module needs a valid Bearer token.
 router.use(bearerAuth);
 
 router.get('/', EducationalCenterController.getAll);

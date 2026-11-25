@@ -1,7 +1,7 @@
 import { TutorAssignment } from "./tutor-assignament.model.js";
 import { TrainingProgram } from "../training-program/training-program.model.js";
 import { AcademicYear } from "../academic-year/academic-year.model.js";
-import { User } from "../auth/user.model.js";
+import { User } from "../user/user.model.js";
 
 export class TutorAssignmentService {
 

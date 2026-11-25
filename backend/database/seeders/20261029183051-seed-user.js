@@ -70,6 +70,17 @@ module.exports = {
         updated_at: now,
       },
     ], {});
+
+    // Synchronize PostgreSQL autoincrement
+    if (queryInterface.sequelize.getDialect() === "postgres") {
+      await queryInterface.sequelize.query(`
+            SELECT setval(
+              pg_get_serial_sequence('public.users', 'id'),
+              COALESCE((SELECT MAX(id) FROM public.users), 0) + 1,
+              false
+            );
+          `);
+    }
   },
 
   async down (queryInterface, Sequelize) {

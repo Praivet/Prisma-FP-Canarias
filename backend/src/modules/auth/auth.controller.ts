@@ -35,7 +35,13 @@ export class AuthController {
 				return;
 			}
 
-			const user = await AuthService.register(username, password);
+			const { firstName, lastName } = req.body ?? {};
+			if (!firstName || !lastName) {
+				res.status(400).json({ message: "firstName and lastName are required" });
+				return;
+			}
+
+			const user = await AuthService.register(username, password, firstName, lastName);
 
 			const token = await AuthService.generateToken(user.id);
 

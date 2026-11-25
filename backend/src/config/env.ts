@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-import { off } from "node:cluster";
 
 dotenv.config();
 
@@ -12,14 +11,16 @@ if(!["development", "test", "production"].includes(NODE_ENV)){
 if(NODE_ENV !== "production"){
   dotenv.config({
     path: `.env.${NODE_ENV}`,
-    // override: los valores de .env.<entorno> ganan a los de .env si se repiten.
-    override: true,
   })
 }
 
 
 export const env = {
   PORT: Number(process.env.PORT) || 3000,
+
+  // Secret used to sign and verify the Bearer tokens (JWT). Only the backend knows it.
+  JWT_SECRET: process.env.JWT_SECRET || "",
+  JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || "1h",
 
   DB_HOST: process.env.DB_HOST || "localhost",
   DB_PORT: Number(process.env.DB_PORT) || 3306,
@@ -28,4 +29,4 @@ export const env = {
   DB_PASSWORD: process.env.DB_PASSWORD || "",
   DB_DIALECT: process.env.DB_DIALECT,
   NODE_ENV
-};
+};

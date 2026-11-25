@@ -10,18 +10,8 @@
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-<<<<<<< HEAD
-    "db:migrate": "sequelize-cli db:migrate",
-    "db:migrate:status": "sequelize-cli db:migrate:status",
-    "db:migrate:undo": "sequelize-cli db:migrate:undo",
-    "db:migrate:undo:all": "sequelize-cli db:migrate:undo:all",
-    "db:seed": "sequelize-cli db:seed:all",
-    "db:seed:undo": "sequelize-cli db:seed:undo:all",
-    "db:reset": "sequelize-cli db:seed:undo:all && sequelize-cli db:migrate:undo:all && sequelize-cli db:migrate && sequelize-cli db:seed:all"
-=======
     "db:migrations": "cross-env NODE_ENV=development tsx scripts/schema-sync.ts migrate",
     "db:seeders": "cross-env NODE_ENV=development sequelize-cli db:seed:all --options-path database/.sequelizerc"
->>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
   },
   "keywords": [],
   "author": "",
@@ -32,11 +22,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-<<<<<<< HEAD
     "jsonwebtoken": "^9.0.3",
-=======
     "multer": "^2.5.0",
->>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
     "mysql2": "^3.24.4",
     "pg": "^8.23.1",
     "pg-hstore": "^2.3.4",
@@ -46,11 +33,8 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-<<<<<<< HEAD
     "@types/jsonwebtoken": "^9.0.10",
-=======
     "@types/multer": "^2.3.0",
->>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
     "@types/node": "^26.5.1",
     "@types/supertest": "^7.2.1",
     "cross-env": "^10.1.0",
