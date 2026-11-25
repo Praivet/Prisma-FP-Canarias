@@ -6,7 +6,7 @@ import {
   Model,
 } from 'sequelize';
 import { sequelize } from '../../config/database.js';
-import { Permission } from '../permission/permission.model.js';
+import { Permission } from './permission.model.js';
 
 export class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
   declare id: CreationOptional<number>;

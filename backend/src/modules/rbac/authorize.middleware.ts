@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { RbacService } from "../modules/permission/rbac.service.js";
+import { RbacService } from "./rbac.service.js";
 
 export const authorize = (requiredPermission: string) => {
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {

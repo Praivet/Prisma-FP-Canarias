@@ -2,8 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt, { type SignOptions } from "jsonwebtoken";
 import { env } from "../../config/env.js";
 import { User } from "../user/user.model.js";
-import { Role } from "../role/role.model.js";
-import { UserRole } from "../user-role/user-role.model.js";
+import { Role } from "../rbac/role.model.js";
+import { UserRole } from "../rbac/user-role.model.js";
 
 // iss / aud claims: who issues the token and who it is meant for.
 export const JWT_ISSUER = "prisma-fp-api";

@@ -21,10 +21,10 @@ import trainingProgramRoutes from "../modules/training-program/training-program.
 import tutorAssignmentRoutes from "../modules/tutor-assignament/tutor-assignament.routes.js";
 
 import userRoutes from "../../src/modules/user/user.routes.js";
-import roleRoutes from "../../src/modules/role/role.routes.js";
-import permissionRoutes from "../../src/modules/permission/permission.routes.js";
-import userRoleRoutes from "../../src/modules/user-role/user-role.routes.js";
-import rolePermissionRoutes from "../../src/modules/role-permission/role-permission.routes.js";
+import roleRoutes from "../../src/modules/rbac/role.routes.js";
+import permissionRoutes from "../../src/modules/rbac/permission.routes.js";
+import userRoleRoutes from "../../src/modules/rbac/user-role.routes.js";
+import rolePermissionRoutes from "../../src/modules/rbac/role-permission.routes.js";
 import authTokenRoutes from "../../src/modules/auth-token/auth-token.routes.js";
 import auditLogRoutes from "../../src/modules/audit-log/audit-log.routes.js";
 import educationalCenterRoutes from "../../src/modules/educational-center/educational-center.routes.js";
