@@ -10,6 +10,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('users', [
       {
+        id: 1,
         email: 'admin@prismafp.test',
         password_hash: passwordHash,
         first_name: 'Admin',
@@ -21,6 +22,7 @@ module.exports = {
         updated_at: now,
       },
       {
+        id: 2,
         email: 'coordinator@prismafp.test',
         password_hash: passwordHash,
         first_name: 'Carmen',
@@ -32,6 +34,7 @@ module.exports = {
         updated_at: now,
       },
       {
+        id: 3,
         email: 'teacher@prismafp.test',
         password_hash: passwordHash,
         first_name: 'Javier',
@@ -43,6 +46,7 @@ module.exports = {
         updated_at: now,
       },
       {
+        id: 4,
         email: 'student@prismafp.test',
         password_hash: passwordHash,
         first_name: 'Ana',
@@ -54,6 +58,7 @@ module.exports = {
         updated_at: now,
       },
       {
+        id: 5,
         email: 'locked@prismafp.test',
         password_hash: passwordHash,
         first_name: 'Pablo',

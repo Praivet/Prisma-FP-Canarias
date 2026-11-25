@@ -24,7 +24,7 @@ import { User } from "../modules/auth/user.model.js";
 import { Role } from "../modules/rbac/role.model.js";
 import { Permission } from "../modules/rbac/permission.model.js";
 import { UserRole } from "../modules/rbac/user-role.model.js";
-import { RolePermission } from "../modules/role-permission/role-permission.model.js";
+import { RolePermission } from "../modules/rbac/role-permission.model.js";
 import { AuthToken } from "../modules/auth-token/auth-token.model.js";
 import { AuditLog } from "../modules/audit-log/audit-log.model.js";
 

@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { PermissionService } from "../permission/permission.service.js";
+import { PermissionService } from "./permission.service.js";
 
 export class PermissionController {
   static async getAll(
