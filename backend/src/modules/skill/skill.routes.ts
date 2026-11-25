@@ -1,11 +1,19 @@
 import { Router } from "express";
 import { SkillController } from "./skill.controller.js";
+import { bearerAuth } from "../../middlewares/bearer-auth-middleware.js";
 
 const router = Router();
 
+// Every route of this module needs a valid Bearer token.
+router.use(bearerAuth);
+
 router.get("/", SkillController.getAll);
 
-// Eager endpoint: GET /:id/eagerly returns the entity with its associations.
+// OJO: rutas con texto fijo antes de "/:id".
+router.get("/eagerly/status/:status/program/:programCode", SkillController.getAllByEnrollmentStatusAndProgramCode);
+
+router.get("/category/:category", SkillController.getAllByCategory);
+
 router.get("/:id/eagerly", SkillController.getEagerlyById);
 
 router.get("/:id", SkillController.getById);

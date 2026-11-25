@@ -58,7 +58,6 @@ export class EmploymentRecordController {
                 });
                 return;
             }
-            // La FK es opcional: solo se comprueba si viene con valor
             if (
                 internshipId !== undefined &&
                 internshipId !== null &&

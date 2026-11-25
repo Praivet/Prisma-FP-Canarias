@@ -6,11 +6,14 @@ import {
   Model,
 } from 'sequelize';
 import { sequelize } from '../../config/database.js';
+import { Permission } from '../permission/permission.model.js';
 
 export class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
   declare id: CreationOptional<number>;
   declare name: string;
   declare description: CreationOptional<string | null>;
+
+   declare permissions?: Permission[];
 }
 
 Role.init(

@@ -14,12 +14,9 @@ export class EmploymentRecord extends Model<
     declare id: CreationOptional<number>;
     declare studentId: number;
     declare companyId: number;
-    // FK opcional: puede ser null (relación 0..1 a N en el ERD)
     declare internshipId: CreationOptional<number | null>;
     declare position: string;
     declare sector: CreationOptional<string | null>;
-    // DATEONLY guarda solo la fecha (sin hora) y Sequelize la devuelve como
-    // texto "YYYY-MM-DD", por eso en TypeScript es string y no Date.
     declare startDate: string;
     declare endDate: CreationOptional<string | null>;
     declare isRelatedToStudies: CreationOptional<boolean>;

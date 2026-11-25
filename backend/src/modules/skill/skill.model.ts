@@ -33,8 +33,9 @@ Skill.init(
       unique: true,
     },
 
+    // EJEMPLO (migración change-skill-category-length): antes STRING(100).
     category: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(150),
       allowNull: true,
     },
 

@@ -14,8 +14,6 @@ export class Internship extends Model<
     declare id: CreationOptional<number>;
     declare enrollmentId: number;
     declare companyId: number;
-    // DATEONLY guarda solo la fecha (sin hora) y Sequelize la devuelve como
-    // texto "YYYY-MM-DD", por eso en TypeScript es string y no Date.
     declare startDate: string;
     declare endDate: CreationOptional<string | null>;
     declare wasHired: CreationOptional<boolean>;

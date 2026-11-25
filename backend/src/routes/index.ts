@@ -30,7 +30,13 @@ import auditLogRoutes from "../../src/modules/audit-log/audit-log.routes.js";
 import educationalCenterRoutes from "../../src/modules/educational-center/educational-center.routes.js";
 import professionalFamilyRoutes from "../../src/modules/professional-family/professional-family.routes.js";
 
+import authRoutes from "../modules/auth/auth.routes.js";
+
 const router = Router();
+
+// Authentication: login and register (Basic Auth) and /me (Bearer). Not protected by bearerAuth.
+router.use("/auth", authRoutes);
+
 // Every new module must be mounted here (and its model imported in associations.ts).
 router.use("/academic-years", academicYearRoutes);
 router.use("/skills", skillRoutes);
@@ -38,6 +44,7 @@ router.use("/students", studentRoutes);
 router.use("/student-enrollments", studentEnrollmentRoutes);
 router.use("/student-interests", studentInterestRoutes);
 router.use("/student-skills", studentSkillRoutes);
+// OJO: cada módulo nuevo necesita su import arriba y su router.use aquí. Si falta, Bruno da 404.
 router.use("/training-programs", trainingProgramRoutes);
 router.use("/tutor-assignments", tutorAssignmentRoutes);
 

@@ -1,9 +1,15 @@
 import { Router } from "express";
 import { StudentInterestController } from "./student-interest.controller.js";
+import { bearerAuth } from "../../middlewares/bearer-auth-middleware.js";
 
 const router = Router();
 
+// Every route of this module needs a valid Bearer token.
+router.use(bearerAuth);
+
 router.get("/", StudentInterestController.getAll);
+
+router.get("/search/:text", StudentInterestController.getAllByNameContaining);
 
 // Specific routes go before "/:id".
 router.get("/student/:studentId", StudentInterestController.getByStudentId);

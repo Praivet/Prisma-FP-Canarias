@@ -217,6 +217,96 @@ Work is organised with Scrum and GitHub Projects. Each task is done in its own b
 
 Roles as defined in `database/seeders/…-seed-role.js`: `ADMIN` (Administrador), `COORDINATOR` (Directivo), `TEACHER` (Tutor) and `STUDENT` (Alumno). The Alumno Colaborador role only takes part in HU-08/HU-09, which are out of scope.
 
+These permissions are loaded by `…-seed-permission.js` and assigned in `…-seed-role-permission.js`. The conditions in the footnotes (own records, assigned programmes) cannot be expressed with a permission alone, so they must be checked in the service.
+
+### Épica 2 (Kacper)
+
+HU-02: Users and roles (RBAC). HU-03: Authentication and session.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `user:read` | ✅ | ❌ | ❌ | ❌ |
+| `user:create` | ✅ | ❌ | ❌ | ❌ |
+| `user:update` | ✅ | ❌ | ❌ | ❌ |
+| `user:delete` | ✅¹ | ❌ | ❌ | ❌ |
+| `role:read` | ✅ | ❌ | ❌ | ❌ |
+| `role:create` | ✅ | ❌ | ❌ | ❌ |
+| `role:update` | ✅ | ❌ | ❌ | ❌ |
+| `role:delete` | ✅ | ❌ | ❌ | ❌ |
+| `permission:read` | ✅ | ❌ | ❌ | ❌ |
+| `permission:create` | ✅ | ❌ | ❌ | ❌ |
+| `permission:update` | ✅ | ❌ | ❌ | ❌ |
+| `permission:delete` | ✅ | ❌ | ❌ | ❌ |
+| `user-role:read` | ✅ | ❌ | ❌ | ❌ |
+| `user-role:create` | ✅ | ❌ | ❌ | ❌ |
+| `user-role:update` | ✅ | ❌ | ❌ | ❌ |
+| `user-role:delete` | ✅ | ❌ | ❌ | ❌ |
+| `role-permission:read` | ✅ | ❌ | ❌ | ❌ |
+| `role-permission:create` | ✅ | ❌ | ❌ | ❌ |
+| `role-permission:update` | ✅ | ❌ | ❌ | ❌ |
+| `role-permission:delete` | ✅ | ❌ | ❌ | ❌ |
+| `auth-token:read` | ✅ | ❌ | ❌ | ❌ |
+| `auth-token:create` | ❌² | ❌² | ❌² | ❌² |
+| `auth-token:update` | ❌² | ❌² | ❌² | ❌² |
+| `auth-token:delete` | ✅³ | ❌ | ❌ | ❌ |
+
+¹ HU-02 talks about deactivating and reactivating accounts; deleting should be the exception.
+
+² Tokens are created and updated by the system during login, activation and password recovery (HU-03), not through the CRUD.
+
+³ To revoke a user's sessions.
+
+### Épica 3 (Iván)
+
+HU-04: Student record.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `student:read` | ✅ | ✅¹ | ✅² | ✅³ |
+| `student:create` | ✅ | ❌ | ✅² | ❌ |
+| `student:update` | ✅ | ❌ | ✅² | ❌ |
+| `student:delete` | ✅ | ❌ | ❌ | ❌ |
+| `student-enrollment:read` | ✅ | ✅¹ | ✅² | ✅³ |
+| `student-enrollment:create` | ✅ | ❌ | ✅² | ❌ |
+| `student-enrollment:update` | ✅ | ❌ | ✅² | ❌ |
+| `student-enrollment:delete` | ✅ | ❌ | ❌ | ❌ |
+| `student-skill:read` | ✅ | ✅¹ | ✅² | ✅³ |
+| `student-skill:create` | ✅ | ❌ | ✅² | ❌ |
+| `student-skill:update` | ✅ | ❌ | ✅² | ❌ |
+| `student-skill:delete` | ✅ | ❌ | ✅² | ❌ |
+| `student-interest:read` | ✅ | ✅¹ | ✅² | ✅³ |
+| `student-interest:create` | ✅ | ❌ | ✅² | ❌ |
+| `student-interest:update` | ✅ | ❌ | ✅² | ❌ |
+| `student-interest:delete` | ✅ | ❌ | ✅² | ❌ |
+| `skill:read` | ✅ | ✅ | ✅ | ❌ |
+| `skill:create` | ✅⁴ | ❌ | ❌ | ❌ |
+| `skill:update` | ✅⁴ | ❌ | ❌ | ❌ |
+| `skill:delete` | ✅⁴ | ❌ | ❌ | ❌ |
+| `training-program:read` | ✅ | ✅ | ✅ | ❌ |
+| `training-program:create` | ✅⁴ | ❌ | ❌ | ❌ |
+| `training-program:update` | ✅⁴ | ❌ | ❌ | ❌ |
+| `training-program:delete` | ✅⁴ | ❌ | ❌ | ❌ |
+| `academic-year:read` | ✅ | ✅ | ✅ | ❌ |
+| `academic-year:create` | ✅⁵ | ❌ | ❌ | ❌ |
+| `academic-year:update` | ✅⁵ | ❌ | ❌ | ❌ |
+| `academic-year:delete` | ✅⁵ | ❌ | ❌ | ❌ |
+| `tutor-assignment:read` | ✅ | ❌ | ✅⁶ | ❌ |
+| `tutor-assignment:create` | ✅ | ❌ | ❌ | ❌ |
+| `tutor-assignment:update` | ✅ | ❌ | ❌ | ❌ |
+| `tutor-assignment:delete` | ✅ | ❌ | ❌ | ❌ |
+
+¹ Not stated in HU-04; deduced because the Directivo needs this data for the KPIs and filters in HU-12.
+
+² Only for students in the teacher's assigned programmes (HU-04). Skills and interests are a list, so the teacher can also remove entries.
+
+³ Only their own record (the consent screen is reached from the student's profile, HU-06).
+
+⁴ Not stated in the HUs; these are shared catalogues, so only the administrator maintains them.
+
+⁵ The active academic year is part of the platform settings (HU-14).
+
+⁶ Only their own assignments.
+
 ### Épica 3 (Juan Pablo)
 
 HU-05: Employment history.
@@ -274,7 +364,7 @@ HU-10: Internship companies and hiring.
 
 ² Only for students in the teacher's assigned programmes.
 
-³ Not stated in HU-10; taken from the current role seeder (`company:write` for COORDINATOR).
+³ Not stated in HU-10; kept from the first version of the role seeder, where COORDINATOR could already manage companies.
 
 ### Épica 7 (Juan Pablo)
 
@@ -304,6 +394,46 @@ HU-11: Graduate survey.
 ² Only their own answers.
 
 ³ Answers must come from the graduate; staff cannot create or change them.
+
+### Épica 8 (Iván)
+
+HU-12: KPI dashboard. HU-13: Report export (PDF/Excel).
+
+These two permissions do not belong to a CRUD entity: the dashboard and the exports read data from other tables (students, employment records, internships, survey answers).
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `dashboard:read` | ✅¹ | ✅ | ❌ | ❌ |
+| `report:export` | ✅¹ | ✅ | ❌ | ❌ |
+
+¹ HU-12 and HU-13 only mention the Directivo; the administrator is added because the role has full access to the platform.
+
+### Épica 9 (Kacper)
+
+HU-14: Administration panel, audit log and platform settings.
+
+| Permission | ADMIN | COORDINATOR | TEACHER | STUDENT |
+|------------|:-----:|:-----------:|:-------:|:-------:|
+| `audit-log:read` | ✅ | ❌ | ❌ | ❌ |
+| `audit-log:create` | ❌¹ | ❌¹ | ❌¹ | ❌¹ |
+| `audit-log:update` | ❌² | ❌ | ❌ | ❌ |
+| `audit-log:delete` | ❌² | ❌ | ❌ | ❌ |
+| `educational-center:read` | ✅ | ✅³ | ✅ | ❌ |
+| `educational-center:create` | ✅ | ❌ | ❌ | ❌ |
+| `educational-center:update` | ✅ | ❌ | ❌ | ❌ |
+| `educational-center:delete` | ✅ | ❌ | ❌ | ❌ |
+| `professional-family:read` | ✅ | ✅ | ✅ | ❌ |
+| `professional-family:create` | ✅⁴ | ❌ | ❌ | ❌ |
+| `professional-family:update` | ✅⁴ | ❌ | ❌ | ❌ |
+| `professional-family:delete` | ✅⁴ | ❌ | ❌ | ❌ |
+
+¹ Entries are written by the system when key actions happen (logins, imports, consent changes, exports), not through the CRUD.
+
+² The audit log must not be altered (HU-02, HU-06).
+
+³ The centre name and logo appear in the exported reports (HU-13).
+
+⁴ Not stated in the HUs; it is a shared catalogue used in the student record and the filters (HU-04, HU-12), so only the administrator maintains it as part of the platform settings.
 
 ## Current status
 
