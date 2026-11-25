@@ -17,4 +17,5 @@ export interface CompanyPayload {
     city?: string | null
     contactEmail?: string | null
     contactPhone?: string | null
+    image?: File | null
 }

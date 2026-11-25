@@ -1,7 +1,11 @@
 import { Router } from "express";
 import { TrainingProgramController } from "./training-program.controller.js";
+import { bearerAuth } from "../../middlewares/bearer-auth-middleware.js";
 
 const router = Router();
+
+// Every route of this module needs a valid Bearer token.
+router.use(bearerAuth);
 
 router.get("/", TrainingProgramController.getAll);
 

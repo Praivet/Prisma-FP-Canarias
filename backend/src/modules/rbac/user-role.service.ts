@@ -15,6 +15,7 @@ export class UserRoleService {
     }) {
         return UserRole.create(data);
     }
+    //update
     static async update(
         userRole: UserRole,
         data: {

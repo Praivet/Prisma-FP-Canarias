@@ -2,6 +2,10 @@ import { clearSession, getSession } from './session'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
 
+export function companyImageUrl(filename: string): string {
+    return `${API_URL.replace(/\/api\/?$/, "")}/images/${encodeURIComponent(filename)}`
+}
+
 // "Vitamin" fetch: every call to the API goes through here, so this is the place
 // that adds the Bearer token of the session to the Authorization header.
 export async function apiFetch<T>(
@@ -9,7 +13,9 @@ export async function apiFetch<T>(
     options: RequestInit = {}
 ): Promise<T> {
     const headers = new Headers(options.headers)
-    if (!headers.has('Content-Type')) headers.set('Content-Type', 'application/json')
+    // With FormData the browser must set the multipart Content-Type (with its boundary) itself
+    const isFormData = options.body instanceof FormData
+    if (!isFormData && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json')
 
     // Login and register send their own "Authorization: Basic ...", so we don't overwrite it.
     const session = getSession()

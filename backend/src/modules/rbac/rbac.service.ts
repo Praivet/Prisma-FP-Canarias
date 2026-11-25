@@ -1,6 +1,6 @@
 import { User } from "../user/user.model.js";
 import { Permission } from "./permission.model.js";
-import { Role } from "../role/role.model.js";
+import { Role } from "./role.model.js";
 
 export class RbacService {
 

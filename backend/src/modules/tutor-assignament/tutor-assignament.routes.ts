@@ -1,7 +1,11 @@
 import { Router } from "express";
 import { TutorAssignmentController } from "./tutor-assignament.controller.js";
+import { bearerAuth } from "../../middlewares/bearer-auth-middleware.js";
 
 const router = Router();
+
+// Every route of this module needs a valid Bearer token.
+router.use(bearerAuth);
 
 router.get("/", TutorAssignmentController.getAll);
 
