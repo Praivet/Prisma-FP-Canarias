@@ -100,12 +100,8 @@ export class CompanyController {
                     return;
                 }
             }
-<<<<<<< HEAD
-            const updatedCompany = await CompanyService.update(company, {
-=======
             //... is an operator from js and ts, any questions -> ask me (jp)
             const data: Parameters<typeof CompanyService.update>[1] = {
->>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
                 ...(taxId !== undefined && { taxId }),
                 ...(name !== undefined && { name }),
                 ...(sector !== undefined && { sector }),

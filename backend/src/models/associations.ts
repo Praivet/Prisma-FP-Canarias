@@ -15,17 +15,10 @@ import { Student } from "../modules/student/student.model.js";
 import { StudentEnrollment } from "../modules/student-enrollment/student-enrollment.model.js";
 import { StudentInterest } from "../modules/student-interest/student-interest.model.js";
 import { StudentSkill } from "../modules/student-skill/student-skill.model.js";
-<<<<<<< HEAD
-import { TrainingProgram } from "../modules/training-program/training-program.model.js";
-import { TutorAssignment } from "../modules/tutor-assignament/tutor-assignament.model.js";
-import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
-import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
-=======
 import { EducationalCenter } from "../modules/educational-center/educational-center.model.js";
 import { ProfessionalFamily } from "../modules/professional-family/professional-family.model.js";
 import { TrainingProgram } from "../modules/training-program/training-program.model.js";
 import { TutorAssignment } from "../modules/tutor-assignament/tutor-assignament.model.js";
->>>>>>> 8e407fc1d6f5b5b2e744c29ee37e1c83c204729b
 
 import { User } from "../modules/auth/user.model.js";
 import { Role } from "../modules/rbac/role.model.js";
