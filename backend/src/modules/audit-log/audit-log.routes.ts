@@ -1,20 +1,23 @@
 import { Router } from 'express';
 import { AuditLogController } from './audit-log.controller.js';
 import { bearerAuth } from '../../middlewares/bearer-auth-middleware.js';
+import { authorize } from '../rbac/authorize.middleware.js';
 
 const router = Router();
 
 // Every route of this module needs a valid Bearer token.
 router.use(bearerAuth);
 
-router.get('/', AuditLogController.getAll);
+// Each route also checks the permission of the user's roles (table role_permissions): 403 if missing.
 
-router.get('/:id', AuditLogController.getById);
+router.get('/', authorize('audit-log:read'), AuditLogController.getAll);
 
-router.post('/', AuditLogController.create);
+router.get('/:id', authorize('audit-log:read'), AuditLogController.getById);
 
-router.put('/:id', AuditLogController.update);
+router.post('/', authorize('audit-log:create'), AuditLogController.create);
 
-router.delete('/:id', AuditLogController.delete);
+router.put('/:id', authorize('audit-log:update'), AuditLogController.update);
+
+router.delete('/:id', authorize('audit-log:delete'), AuditLogController.delete);
 
 export default router;
