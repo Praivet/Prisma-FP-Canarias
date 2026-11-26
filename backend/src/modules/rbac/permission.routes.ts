@@ -1,20 +1,23 @@
 import { Router } from 'express';
 import { PermissionController } from './permission.controller.js';
 import { bearerAuth } from '../../middlewares/bearer-auth-middleware.js';
+import { authorize } from './authorize.middleware.js';
 
 const router = Router();
 
 // Every route of this module needs a valid Bearer token.
 router.use(bearerAuth);
 
-router.get('/', PermissionController.getAll);
+// Each route also checks the permission of the user's roles (table role_permissions): 403 if missing.
 
-router.get('/:id', PermissionController.getById);
+router.get('/', authorize('permission:read'), PermissionController.getAll);
 
-router.post('/', PermissionController.create);
+router.get('/:id', authorize('permission:read'), PermissionController.getById);
 
-router.put('/:id', PermissionController.update);
+router.post('/', authorize('permission:create'), PermissionController.create);
 
-router.delete('/:id', PermissionController.delete);
+router.put('/:id', authorize('permission:update'), PermissionController.update);
+
+router.delete('/:id', authorize('permission:delete'), PermissionController.delete);
 
 export default router;
